@@ -1,3 +1,40 @@
+
+export const faqHeaderList = [
+  "Main",
+  "Deposit",
+  "Fiat Deposit",
+  "Withdrawn",
+  "Buy",
+  "Sell",
+  "Coin",
+  "Wallet",
+  "Trade",
+  "P2P",
+  "Gift Card",
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import {
   benefitIcon1,
   benefitIcon2,
@@ -11,9 +48,7 @@ import {
   file02,
   framer,
   homeSmile,
-  notification2,
-  notification3,
-  notification4,
+
   notion,
   photoshop,
   plusSquare,
@@ -48,34 +83,113 @@ export const navigation = [
   {
     id: "0",
     title: "Docs",
-    url: "#docs",
+    url: "docs",
+    onlyMobile: false,
   },
   {
     id: "1",
     title: "About Us",
-    url: "#about-us",
+    url: "about-us",
+    onlyMobile: false,
   },
   {
     id: "2",
     title: "Blog",
-    url: "#blog",
+    url: "blog",
+    onlyMobile: false,
   },
   {
     id: "3",
     title: "Products",
-    url: "#products",
+    url: "products",
+    subLink: [
+      {
+        id: "0",
+        title: "Lend",
+        url: "lend",
+      },
+      {
+        id: "1",
+        title: "Loans",
+        url: "borrow",
+      },
+      {
+        id: "2",
+        title: "Exchange",
+        url: "exchange",
+      },
+    ],
+    isList: true,
+    onlyMobile: false,
+
   },
   {
     id: "4",
     title: "New account",
-    url: "#signup",
+    url: "signup",
     onlyMobile: true,
   },
   {
     id: "5",
     title: "Sign in",
-    url: "#login",
+    url: "login",
     onlyMobile: true,
+  },
+];
+export const baseNavigation = [
+  {
+    id: "0",
+    title: "Discover",
+    url: "discover",
+    isList: false,
+  },
+  {
+    id: "1",
+    title: "Markets",
+    url: "markets",
+    isList: false,
+  },
+  {
+    id: "2",
+    title: "Products",
+    url: "products",
+    subLink: [
+      {
+        id: "0",
+        title: "Lend",
+        url: "lend",
+      },
+      {
+        id: "1",
+        title: "Loans",
+        url: "borrow",
+      },
+      {
+        id: "2",
+        title: "Exchange",
+        url: "exchange",
+      },
+    ],
+    isList: true,
+  },
+
+  {
+    id: "3",
+    title: "Portfolio",
+    url: "wallet",
+    isList: false,
+  },
+  {
+    id: "4",
+    title: "Governance",
+    url: "governance",
+    isList: false,
+  },
+  {
+    id: "5",
+    title: "Profile",
+    url: "profile",
+    isList: false,
   },
 ];
 
@@ -141,8 +255,6 @@ export const footerNavigation = [
 
 
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare];
-
-export const notificationImages = [notification4, notification3, notification2];
 
 export const companyLogos = [yourlogo, yourlogo, yourlogo, yourlogo, yourlogo];
 

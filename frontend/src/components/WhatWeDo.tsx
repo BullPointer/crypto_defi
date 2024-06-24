@@ -10,11 +10,11 @@ const WhatWeDo = () => {
         <div className="w-[80%]">
           <div
             className="text-2xl sm:text-3xl md:text-5xl mb-5 text-neutral-50 
-          cursor-none py-12 sm:py-4"
+          cursor-none py-12 sm:py-4 text-center md:text-left"
           >
             Your No.1 choice for exchange, lending, earning
           </div>
-          <div className="leading-8 text-lg text-neutral-300/50">
+          <div className="leading-8 text-center md:text-left text-lg text-neutral-300/50">
             Discover the ultimate crypto playground where your digital assets
             come to life! Effortlessly exchange over 900+ cryptocurrencies, earn
             rewards just by storing your assets, and borrow crypto whenever you

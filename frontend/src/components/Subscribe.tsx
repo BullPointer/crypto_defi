@@ -6,7 +6,7 @@ const Subscribe = () => {
   return (
     <div
       className="flex flex-col md:flex-row justify-between 
-    items-center border-t-[0.0001rem] p-4"
+    items-center p-4 bg-n-11/25"
     >
       <div className="py-5">
         <label htmlFor="">Subscribe for updates</label>

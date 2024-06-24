@@ -1,12 +1,12 @@
 import { brainwave } from "../assets";
-import { navigation } from "../constants/";
+import { baseNavigation } from "../constants";
 import MenuSvg from "../assets/svg/MenuSvg";
 import Button from "./Button";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
-const Navbar = () => {
+const FinanceNavbar = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   const [showList, setShowList] = useState<string | null>(null);
 
@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <nav
       className="relative flex flex-col md:flex-row 
-    justify-evenly p-4"
+    justify-evenly p-5"
     >
       <div className="flex justify-between">
         <Link to={"/"} className="block w-[12rem] xl:mr-8 p-4">
@@ -56,16 +56,14 @@ const Navbar = () => {
          absolute md:relative z-10 md:translate-y-[0%] 
          left-0`}
       >
-        {navigation?.map((list, idx) => (
+        {baseNavigation?.map((list, idx) => (
           <li
-            className={`${list.onlyMobile && "block md:hidden"}
-            cursor-pointer  ${!list.isList && "hover:bg-n-4/5 "} 
-            w-full md:w-auto flex ${
+            className={`
+             cursor-pointer ${!list.isList && "hover:bg-n-4/5 "} 
+            w-full md:w-auto flex  ${
               list.isList && "flex-col items-start "
             }  justify-start 
-            rounded-none md:rounded-md
-            
-            `}
+            rounded-none md:rounded-md`}
             key={idx}
             onMouseEnter={() =>
               window.innerWidth >= 768 &&
@@ -79,13 +77,13 @@ const Navbar = () => {
           >
             <div className="relative w-full">
               <div
-                className={`w-full ${
+                className={`${
                   list.isList &&
                   "flex justify-between items-center gap-3 opacity-60 md:opacity-100 pb-3 md:pb-0"
                 }`}
               >
                 {!list.isList ? (
-                  <NavLink to={`/${list.url}`}>
+                  <NavLink to={list.url}>
                     <div className="p-3 md:p-5">{list.title}</div>
                   </NavLink>
                 ) : (
@@ -104,12 +102,11 @@ const Navbar = () => {
                     />
                   ))}
               </div>
-
-              <div className="h-auto w-full md:w-auto md:absolute left-0 bg-[#171825f3] ">
+              <div className="h-auto w-full md:w-auto md:absolute left-0 bg-n-3/5">
                 {list.isList &&
                   showList === list.title.toLowerCase() &&
                   list?.subLink?.map((data, subidx) => (
-                    <Link key={subidx} to={`/${data.url}`}>
+                    <Link key={subidx} to={`${data.url}`}>
                       <div className=" w-full ">
                         <div className=" px-12 py-3 hover:bg-n-4/5 w-full">
                           {data.title}
@@ -123,22 +120,11 @@ const Navbar = () => {
         ))}
       </ul>
 
-      <div className="flex items-center">
-        <Link
-          to="/signup"
-          className="button hidden mr-8 text-n-1/50 
-          transition-colors hover:text-n-1 md:block"
-        >
-          New account
-        </Link>
-        <Link to={"/login"}>
-          <Button defaultStyling className="" href="#login">
-            Sign in
-          </Button>
-        </Link>
-      </div>
+      <Button defaultStyling className="" href="#login">
+        Connect Wallet
+      </Button>
     </nav>
   );
 };
 
-export default Navbar;
+export default FinanceNavbar;
