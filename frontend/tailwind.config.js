@@ -72,8 +72,9 @@ export default {
           "conic-gradient(from 225deg, #FFC876, #79FFF7, #9F53FF, #FF98E2, #FFC876)",
       },
     },
-  },
+  }, // "@tailwindcss/typography";
   plugins: [
+    require("@tailwindcss/typography"), // Add this line
     plugin(function ({ addBase, addComponents, addUtilities }) {
       addBase({});
       addComponents({

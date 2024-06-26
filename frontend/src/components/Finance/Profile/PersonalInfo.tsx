@@ -1,61 +1,25 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useState } from "react";
 import { Input } from "..";
-
-const formData = [
-  {
-    label: "First Name",
-    name: "firstname",
-    placeholder: "First Name",
-    type: "text",
-    required: false,
-  },
-  {
-    label: "Last Name",
-    name: "lastname",
-    placeholder: "Last Name",
-    type: "text",
-    required: false,
-  },
-  {
-    label: "Middle Name",
-    name: "middlename",
-    placeholder: "Middle Name",
-    type: "text",
-    required: false,
-  },
-  {
-    label: "City",
-    name: "city",
-    placeholder: "City",
-    type: "text",
-    required: false,
-  },
-  {
-    label: "Zip Code",
-    name: "zipcode",
-    placeholder: "Zip Code",
-    type: "text",
-    required: false,
-  },
-  {
-    label: "Date of Birth(DoB)",
-    name: "zipcode",
-    placeholder: "Zip Code",
-    type: "date",
-    required: false,
-  },
-  {
-    label: "Social Security Number or Tax ID Number",
-    name: "idnum",
-    placeholder: "ID Number",
-    type: "text",
-    required: false,
-  },
-];
+import { formData } from "../constants";
 
 const PersonalInfo = () => {
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    middlename: "",
+    city: "",
+    zipcode: "",
+    dateofbirth: "",
+    idnum: "",
+  });
   const [clipboard, setClipboard] = useState({ copied: false });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setUser({ ...user, [name]: value });
+  };
 
   const handleClipboard = () => {
     navigator.clipboard.writeText("Helo");
@@ -129,6 +93,7 @@ const PersonalInfo = () => {
               <Input
                 key={idx}
                 className={"last:col-span-2"}
+                handleChange={handleChange}
                 label={data.label}
                 name={data.name}
                 placeholder={data.placeholder}
