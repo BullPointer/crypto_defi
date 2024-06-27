@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import img1 from "../assets/google-play-store.png";
+import img2 from "../assets/apple-store.png";
 import Button from "./Button";
 
 const Header = () => {
@@ -24,6 +26,16 @@ const Header = () => {
         <Button className="rounded-md rounded-l-3xl font-semibold bg-white text-gradient from-neutral-600 to-neutral-400 text-neutral-700 backdrop-blur-md py-2 px-4">
           <Link to={`fi/lend`}>Lend Now</Link>
         </Button>
+      </div>
+      <div className="flex justify-center gap-5 mt-8">
+        {[img1, img2].map((img, idx) => (
+          <img
+            className="h-[3rem] w-auto cursor-pointer"
+            key={idx}
+            src={img}
+            alt=""
+          />
+        ))}
       </div>
     </div>
   );

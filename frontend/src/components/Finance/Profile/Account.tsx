@@ -1,43 +1,7 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useNavigate } from "react-router-dom";
+import { accountData } from "../constants";
 
-const accountData = [
-  {
-    _id: 0,
-    icon: "ic:round-account-tree",
-    text: "Account Type",
-    subText: "Personal",
-    align: "row",
-  },
-  {
-    _id: 1,
-    icon: "f7:gift",
-    text: "Refer to earn",
-    subText: "Earn bonuses from us by referring our service",
-    align: "column",
-    actionType: "link",
-    action: "/fi/profile/account/refer_to_earn",
-  },
-  {
-    _id: 2,
-    icon: "material-symbols:stabilization-lock",
-    text: "Change Password",
-    subText: `You will be prompted to click a verification link sent to the email
-            you registered with email@email.com`,
-    align: "column",
-    actionType: "button",
-    action: "Confirm Change of Password",
-  },
-  {
-    _id: 3,
-    icon: "solar:password-outline",
-    text: "Check Activity",
-    subText: "Learn about your account",
-    align: "column",
-    actionType: "link",
-    action: "/fi/profile/account/check_activity",
-  },
-];
 const Account = () => {
   const navigate = useNavigate();
 

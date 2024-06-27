@@ -81,7 +81,8 @@ const Navbar = () => {
               <div
                 className={`w-full ${
                   list.isList &&
-                  "flex justify-between items-center gap-3 opacity-60 md:opacity-100 pb-3 md:pb-0"
+                  `flex justify-between items-center gap-3 
+                  opacity-60 md:opacity-100 pb-3 md:pb-0 pr-2`
                 }`}
               >
                 {!list.isList ? (

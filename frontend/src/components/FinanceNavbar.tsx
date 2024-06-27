@@ -1,5 +1,5 @@
 import { brainwave } from "../assets";
-import { baseNavigation } from "../constants";
+import { financeNavigation } from "../constants";
 import MenuSvg from "../assets/svg/MenuSvg";
 import Button from "./Button";
 import { useState } from "react";
@@ -47,7 +47,8 @@ const FinanceNavbar = () => {
       <ul
         className={`${
           openNavigation
-            ? "translate-y-[55%] backdrop-blur-sm h-screen"
+            ? `translate-y-[55%] backdrop-blur-sm h-fit py-10
+            overflow-y-hidden `
             : "-translate-y-[250%] backdrop-blur-none transition-none"
         }  w-full md:w-fit flex flex-col 
         md:flex-row  items-center transition-translate
@@ -56,11 +57,11 @@ const FinanceNavbar = () => {
          absolute md:relative z-10 md:translate-y-[0%] 
          left-0`}
       >
-        {baseNavigation?.map((list, idx) => (
+        {financeNavigation?.map((list, idx) => (
           <li
             className={`
              cursor-pointer ${!list.isList && "hover:bg-n-4/5 "} 
-            w-full md:w-auto flex  ${
+            w-full md:w-auto flex ${
               list.isList && "flex-col items-start "
             }  justify-start 
             rounded-none md:rounded-md`}
@@ -79,15 +80,19 @@ const FinanceNavbar = () => {
               <div
                 className={`${
                   list.isList &&
-                  "flex justify-between items-center gap-3 opacity-60 md:opacity-100 pb-3 md:pb-0"
+                  `flex justify-between items-center pr-2
+                  opacity-60 md:opacity-100 pb-3 md:pb-0 `
                 }`}
               >
                 {!list.isList ? (
-                  <NavLink to={list.url}>
+                  <NavLink
+                    onClick={() => setOpenNavigation(false)}
+                    to={list.url}
+                  >
                     <div className="p-3 md:p-5">{list.title}</div>
                   </NavLink>
                 ) : (
-                  <div className="p-3 md:p-5">{list.title}</div>
+                  <div className="p-3 md:py-5">{list.title}</div>
                 )}
                 {list.isList &&
                   (showList === list.title.toLowerCase() ? (
@@ -102,14 +107,23 @@ const FinanceNavbar = () => {
                     />
                   ))}
               </div>
-              <div className="h-auto w-full md:w-auto md:absolute left-0 bg-n-3/5">
+              <div className="z-50 backdrop-blur-3xl bg-[#10111a86] h-auto w-full md:w-auto md:absolute left-0 ">
                 {list.isList &&
                   showList === list.title.toLowerCase() &&
                   list?.subLink?.map((data, subidx) => (
-                    <Link key={subidx} to={`${data.url}`}>
+                    <Link
+                      onClick={() => setOpenNavigation(false)}
+                      key={subidx}
+                      to={`${data.url}`}
+                    >
                       <div className=" w-full ">
-                        <div className=" px-12 py-3 hover:bg-n-4/5 w-full">
-                          {data.title}
+                        <div
+                          className="flex items-center gap-2 
+                        px-12 md:px-8 py-3 hover:bg-n-3/5 w-full 
+                        text-[#4370cae5]"
+                        >
+                          <Icon className="text-lg" icon={data.icon} />
+                          <span>{data.title}</span>
                         </div>
                       </div>
                     </Link>

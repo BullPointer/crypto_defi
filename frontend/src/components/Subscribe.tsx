@@ -25,7 +25,12 @@ const Subscribe = () => {
       </div>
       <div className="flex  gap-8">
         {[img1, img2].map((img, idx) => (
-          <img className="h-[3rem] w-auto " key={idx} src={img} alt="" />
+          <img
+            className="h-[3rem] w-auto cursor-pointer"
+            key={idx}
+            src={img}
+            alt=""
+          />
         ))}
       </div>
     </div>

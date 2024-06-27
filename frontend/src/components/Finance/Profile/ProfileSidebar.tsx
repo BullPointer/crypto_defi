@@ -1,36 +1,9 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { Link } from "react-router-dom";
+import { profileSidebarData } from "../constants";
 
-const profileSidebarData = [
-  {
-    icon: "material-symbols:account-circle-full",
-    text: "Account",
-    link: "account",
-  },
-
-  {
-    icon: "pajamas:information-o",
-    text: "Personal Info",
-    link: "personal-info",
-  },
-  {
-    icon: "material-symbols:edit-notifications-outline-sharp",
-    text: "Notifications",
-    link: "notifications",
-  },
-  {
-    icon: "ic:round-help-outline",
-    text: "Help",
-    link: "help",
-  },
-  {
-    icon: "material-symbols:rule-settings-rounded",
-    text: "Application Settings",
-    link: "application-settings",
-  },
-];
 const ProfileSidebar = () => {
-  const commonStyle = "flex justify-start";
+  const commonStyle = "hidden md:flex justify-start";
   return (
     <div
       className="w-[80%] mx-auto bg-transparent bg-opacity-30 

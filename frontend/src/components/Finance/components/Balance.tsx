@@ -18,7 +18,7 @@ const Balance = ({
 }: BalanceProps) => {
   return (
     <div
-      className={`bg-n-5/10 backdrop-blur-3xl mb-5 
+      className={`bg-n-5/10 mb-5 
     p-5 sm:p-6 md:p-8 rounded-3xl ${className}`}
     >
       <div className="flex justify-between">

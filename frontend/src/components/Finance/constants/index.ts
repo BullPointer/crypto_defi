@@ -1,3 +1,41 @@
+export const accountData = [
+    {
+        _id: 0,
+        icon: "ic:round-account-tree",
+        text: "Account Type",
+        subText: "Personal",
+        align: "row",
+    },
+    {
+        _id: 1,
+        icon: "f7:gift",
+        text: "Refer to earn",
+        subText: "Earn bonuses from us by referring our service",
+        align: "column",
+        actionType: "link",
+        action: "/fi/profile/account/refer_to_earn",
+    },
+    {
+        _id: 2,
+        icon: "material-symbols:stabilization-lock",
+        text: "Change Password",
+        subText: `You will be prompted to click a verification link sent to the email
+            you registered with email@email.com`,
+        align: "column",
+        actionType: "button",
+        action: "Confirm Change of Password",
+    },
+    {
+        _id: 3,
+        icon: "solar:password-outline",
+        text: "Check Activity",
+        subText: "Learn about your account",
+        align: "column",
+        actionType: "link",
+        action: "/fi/profile/account/check_activity",
+    },
+];
+
 export const formData = [
     {
         label: "First Name",
@@ -47,6 +85,35 @@ export const formData = [
         placeholder: "ID Number",
         type: "text",
         required: false,
+    },
+];
+
+export const profileSidebarData = [
+    {
+        icon: "material-symbols:account-circle-full",
+        text: "Account",
+        link: "account",
+    },
+
+    {
+        icon: "pajamas:information-o",
+        text: "Personal Info",
+        link: "personal-info",
+    },
+    {
+        icon: "material-symbols:edit-notifications-outline-sharp",
+        text: "Notifications",
+        link: "notifications",
+    },
+    {
+        icon: "ic:round-help-outline",
+        text: "Help",
+        link: "help",
+    },
+    {
+        icon: "material-symbols:rule-settings-rounded",
+        text: "Application Settings",
+        link: "application-settings",
     },
 ];
 

@@ -33,10 +33,10 @@ const Language = ({
         />
         <div className="font-serif font-bold">Language</div>
       </div>
-      <div className="w-[20%] relative ">
+      <div className=" relative ">
         <div
           onClick={() => setShowLanguage(!showLanguage)}
-          className={`${commonStyle} text-left rounded-md
+          className={`${commonStyle} gap-2 text-left rounded-md
             border border-[#4370cae5] shadow-2xl`}
         >
           <div className="text-sm">{language.toUpperCase()}</div>
