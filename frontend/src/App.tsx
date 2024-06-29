@@ -11,6 +11,8 @@ import {
   Portfolio,
   TermsAndConditions,
   Profile,
+  Signup,
+  Signin,
 } from ".";
 import {
   Account,
@@ -36,6 +38,8 @@ const App = () => {
       </Route>
       <Route path="blog/:id" element={<BlogDisplay />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="login" element={<Signin />} />
+      <Route path="signup" element={<Signup />} />
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="fi" element={<Finance />}>
         <Route path="*" index element={<Portfolio />} />

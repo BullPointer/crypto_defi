@@ -4,6 +4,7 @@ import {
   Navbar,
   VerticalLine,
   HorizontalLine,
+  HomePageTrends,
   Subscribe,
   TrustSection,
   WhatWeDo,
@@ -18,6 +19,7 @@ const Homepage = () => {
       <TrustSection />
       <HorizontalLine />
       <WhatWeDo />
+      <HomePageTrends />
       <Subscribe />
       <Footer />
     </div>

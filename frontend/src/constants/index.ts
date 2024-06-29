@@ -13,28 +13,69 @@ export const faqHeaderList = [
   "Gift Card",
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const countryNames = [
+  "Argentina",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Belgium",
+  "Brazil",
+  "Bulgaria",
+  "Chile",
+  "Colombia",
+  "Costa Rica",
+  "Croatia",
+  "Czech Republic",
+  "Denmark",
+  "Dominican Republic",
+  "Estonia",
+  "Finland",
+  "France",
+  "Georgia",
+  "Germany",
+  "Greece",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Ireland",
+  "Israel",
+  "Italy",
+  "Japan",
+  "Luxembourg",
+  "Malaysia",
+  "Malta",
+  "Mexico",
+  "Moldova",
+  "Monaco",
+  "Netherlands",
+  "New Zealand",
+  "Nigeria",
+  "Norway",
+  "Oman",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Romania",
+  "Saudi Arabia",
+  "Serbia",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "South Africa",
+  "South Korea",
+  "Spain",
+  "Sweden",
+  "Switzerland",
+  "Turkey",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "Uruguay",
+  "Vietnam",
+];
 import {
   benefitIcon1,
   benefitIcon2,
@@ -88,17 +129,17 @@ export const navigation = [
       {
         id: "0",
         title: "Lend",
-        url: "lend",
+        url: "fi/lend",
       },
       {
         id: "1",
         title: "Loans",
-        url: "borrow",
+        url: "fi/borrow",
       },
       {
         id: "2",
         title: "Exchange",
-        url: "exchange",
+        url: "fi/exchange",
       },
     ],
     isList: true,

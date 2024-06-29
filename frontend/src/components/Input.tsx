@@ -1,10 +1,14 @@
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+
 type InputProps = {
   className?: String;
   label?: String;
   name: String;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleShowPassword?: React.MouseEventHandler<HTMLElement>;
   placeholder?: String;
   required?: Boolean;
+  showPassword?: Boolean;
   type: String;
 };
 
@@ -13,13 +17,15 @@ export const Input = ({
   label,
   name,
   handleChange,
+  handleShowPassword,
   placeholder,
-  type,
   required,
+  showPassword,
+  type,
 }: InputProps) => {
   return (
     <div
-      className={`flex 
+      className={`flex px-3
     ${
       type !== "checkbox" ? "flex-col gap-2" : "justify-center items-center"
     } ${className}`}
@@ -30,13 +36,32 @@ export const Input = ({
           {required && <span className="text-[#ec2525]">*</span>}
         </label>
       )}
-      <input
-        className={`p-3 rounded-lg text-sm outline-none`}
-        onChange={handleChange}
-        name={String(name)}
-        type={String(type)}
-        placeholder={String(placeholder)}
-      />
+      <div
+        className={`${name === "password" && "flex items-center"} 
+         bg-[#3b3a3a] rounded-lg p-2`}
+      >
+        <input
+          className={`w-full p-1 sm:p-3 text-xs sm:text-sm outline-none `}
+          onChange={handleChange}
+          name={String(name)}
+          type={String(type)}
+          placeholder={String(placeholder)}
+        />
+        {name === "password" &&
+          (showPassword ? (
+            <Icon
+              onClick={handleShowPassword}
+              className="p-3 text-xl cursor-pointer"
+              icon={"zondicons:view-hide"}
+            />
+          ) : (
+            <Icon
+              onClick={handleShowPassword}
+              className=" p-3 text-xl cursor-pointer"
+              icon={"zondicons:view-show"}
+            />
+          ))}
+      </div>
     </div>
   );
 };

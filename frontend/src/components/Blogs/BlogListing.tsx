@@ -8,7 +8,7 @@ export const blogData = [
     blogImg: Img,
     date: "November 8, 2024",
     writer: "Osiex",
-    title: "The unimaginable with cryptocurrencies",
+    title: "The unimaginable with our redefined cryptocurrencies",
     content: `The Main satisfying thing about mining Bitcoin, Ethereum and other top
           trending Cryptocurrency`,
   },
@@ -17,7 +17,7 @@ export const blogData = [
     blogImg: Img,
     date: "November 8, 2024",
     writer: "Osiex",
-    title: "The unimaginable with cryptocurrencies",
+    title: "The unimaginable with our redefined cryptocurrencies",
     content: `The Main satisfying thing about mining Bitcoin, Ethereum and other top
           trending Cryptocurrency`,
   },
@@ -26,7 +26,7 @@ export const blogData = [
     blogImg: Img,
     date: "November 8, 2024",
     writer: "Osiex",
-    title: "The unimaginable with cryptocurrencies",
+    title: "The unimaginable with our redefined cryptocurrencies",
     content: `The Main satisfying thing about mining Bitcoin, Ethereum and other top
           trending Cryptocurrency`,
   },
@@ -35,7 +35,7 @@ export const blogData = [
     blogImg: Img,
     date: "November 8, 2024",
     writer: "Osiex",
-    title: "The unimaginable with cryptocurrencies",
+    title: "The unimaginable with our redefined cryptocurrencies",
     content: `The Main satisfying thing about mining Bitcoin, Ethereum and other top
           trending Cryptocurrency`,
   },
@@ -44,7 +44,7 @@ export const blogData = [
     blogImg: Img,
     date: "November 8, 2024",
     writer: "Osiex",
-    title: "The unimaginable with cryptocurrencies",
+    title: "The unimaginable with our redefined cryptocurrencies",
     content: `The Main satisfying thing about mining Bitcoin, Ethereum and other top
           trending Cryptocurrency`,
   },
@@ -53,7 +53,7 @@ export const blogData = [
     blogImg: Img,
     date: "November 8, 2024",
     writer: "Osiex",
-    title: "The unimaginable with cryptocurrencies",
+    title: "The unimaginable with our redefined cryptocurrencies",
     content: `The Main satisfying thing about mining Bitcoin, Ethereum and other top
           trending Cryptocurrency`,
   },

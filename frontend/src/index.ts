@@ -8,15 +8,19 @@ import Finance from "./pages/Finance";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
+import HomePageTrends from "./components/HomePageTrends";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Profile from "./pages/Profile";
 import Portfolio from "./components/Finance/Portfolio";
+import Subscribe from "./components/Subscribe";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import TrustSection from "./components/TrustSection";
+import ViaGoogleOrApple from "./components/ViaGoogleOrApple";
 import WhatWeDo from "./components/WhatWeDo";
-import Subscribe from "./components/Subscribe";
 import { VerticalLine, HorizontalLine } from "./components/designs/SectionLine";
 
 export {
@@ -30,15 +34,19 @@ export {
     Footer,
     Header,
     Homepage,
+    HomePageTrends,
     HorizontalLine,
     Navbar,
     NotFound,
     PrivacyPolicy,
     Portfolio,
     Profile,
+    Subscribe,
+    Signin,
+    Signup,
     TermsAndConditions,
     TrustSection,
     VerticalLine,
+    ViaGoogleOrApple,
     WhatWeDo,
-    Subscribe,
 }
