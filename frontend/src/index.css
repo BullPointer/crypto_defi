@@ -86,3 +86,56 @@
 .-rotate-360 {
   @apply rotate-[-360deg];
 }
+
+.zigzag-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.zigzag,
+.zigzagtopdown,
+.zigzagdowntop {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(
+    135deg,
+    transparent 25%,
+    #2c2726 25%,
+    #635e97 50%,
+    transparent 50%,
+    transparent 75%,
+    #b4bff0 75%,
+    #181c36
+  );
+  background-size: 30px 30px;
+  position: absolute;
+  /* animation: movedowntop 3s linear infinite; */
+}
+.zigzag {
+  top: 30%;
+}
+.zigzagtopdown {
+  animation: movetopdown 120s linear infinite;
+}
+.zigzagdowntop {
+  animation: movedowntop 120s linear infinite;
+}
+
+@keyframes movetopdown {
+  0% {
+    top: -50px;
+  }
+  100% {
+    top: 100vh;
+  }
+}
+
+@keyframes movedowntop {
+  0% {
+    bottom: -50px;
+  }
+  100% {
+    bottom: 100vh;
+  }
+}

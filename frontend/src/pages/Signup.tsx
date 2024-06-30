@@ -21,7 +21,13 @@ const Signup = () => {
     <div>
       <Navbar />
       <div className="px-3 sm:px-10 md:p-0 md:grid grid-cols-3">
-        <div className="bg-white hidden md:block"></div>
+        <div className="hidden md:block">
+          <div className="zigzag-container">
+            <div className="zigzagtopdown"></div>
+            <div className="zigzag"></div>
+            <div className="zigzagdowntop"></div>
+          </div>
+        </div>
         <div className="h-auto mt-8 px-2 my-20">
           <div
             className="text-center text-[1.5rem] lg:text-[2rem]
@@ -100,7 +106,13 @@ const Signup = () => {
             <ViaGoogleOrApple icon={"uiw:apple"} text={"Continue with Apple"} />
           </form>
         </div>
-        <div className="bg-white hidden md:block"></div>
+        <div className="hidden md:block">
+          <div className="zigzag-container">
+            <div className="zigzagtopdown"></div>
+            <div className="zigzag"></div>
+            <div className="zigzagdowntop"></div>
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
