@@ -6,22 +6,22 @@ import { getCoinDataByIdApi } from "../../handleApi/coingeckoApi";
 // [[1720102558000, 57194.5614298522]]
 export type CoinType = {
   time: Number;
-  value: Number;
+  value: Number | String;
 };
 
 const MainWalltet = () => {
-  const [coinPrices, setCoinPrices] = useState([]);
+  const [coinPrices, setCoinPrices] = useState([] as CoinType[]);
   const [coinMarketCaps, setCoinMarketCaps] = useState([]);
   const [coinTotalVolumes, setCoinTotalVolumes] = useState([]);
 
   const fetchCoinDataByIdApi = async () => {
     try {
-      const { data } = await getCoinDataByIdApi("bitcoin", "usd", 5);
+      const { data } = await getCoinDataByIdApi("ethereum", "usd", 1);
 
       const newMarketCaps = data.market_caps?.map((d: Array<Number>) => {
         return {
           time: d[0],
-          value: d[1],
+          value: String(d[1]),
         };
       });
       const newPrices = data.prices?.map((d: Array<Number>) => {
@@ -41,9 +41,9 @@ const MainWalltet = () => {
       setCoinMarketCaps(coinMarketCaps);
       setCoinTotalVolumes(coinTotalVolumes);
 
-      console.log("The newMarketCaps data ", newMarketCaps);
-      console.log("The newPrices data ", newPrices);
-      console.log("The newTotalVolumes data ", newTotalVolumes);
+      // console.log("The newMarketCaps data ", newMarketCaps);
+      // console.log("The newPrices data ", typeof newPrices);
+      // console.log("The newTotalVolumes data ", typeof newTotalVolumes);
     } catch (error) {
       console.log(error);
     }

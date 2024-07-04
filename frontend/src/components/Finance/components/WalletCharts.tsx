@@ -17,13 +17,15 @@ import { CoinType } from "../MainWalltet";
 //   days: Number;
 // };
 
-const WalletCharts = ({ coinPrices }: CoinType) => {
+const WalletCharts = ({ coinPrices }: CoinType[]) => {
+  console.log("I have data to be", coinPrices);
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
         width={500}
         height={400}
-        data={chartData}
+        data={coinPrices}
         margin={{
           top: 0,
           right: 30,
@@ -34,7 +36,7 @@ const WalletCharts = ({ coinPrices }: CoinType) => {
         {/* <CartesianGrid strokeDasharray="5 5" /> */}
         {/* <CartesianGrid /> */}
         {/* <XAxis dataKey="name" /> */}
-        <YAxis dataKey={"pv"} />
+        {/* <YAxis dataKey={""} /> */}
         <XAxis />
         {/* <YAxis /> */}
         <Tooltip content={<CustomTooltip />} />
@@ -42,7 +44,7 @@ const WalletCharts = ({ coinPrices }: CoinType) => {
         <Area
           type="monotone"
           stackId={"1"}
-          dataKey="uv"
+          dataKey="value"
           stroke="#8884d8"
           fill="#2a293f"
           //   fill="#8884d8"
