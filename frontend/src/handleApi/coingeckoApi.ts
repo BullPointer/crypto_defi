@@ -12,11 +12,12 @@ export const getPopularCoinApi = async () => {
 };
 // https://api.coingecko.com/api/v3/coins/bitcoin
 // /bitcoin/market_chart/?vs_currency=usd&days=60
-export const getCoinDataByIdApi = async (symbol: String) => {
+// bitcoin/market_chart?vs_currency=usd&days=0
+export const getCoinDataByIdApi = async (name: String, currency: String, days: Number) => {
     const header = {
         "x-cg-demo-api-key": "CG-BsK5K8jame6HvBvpT79MDTqD"
     }
-    const response = await axios.get(`${link}/bitcoin/market_chart/?vs_currency=usd&days=60`, { headers: header });
+    const response = await axios.get(`${link}/${name}/market_chart/?vs_currency=${currency}&days=${days}`, { headers: header });
 
     return response;
 };

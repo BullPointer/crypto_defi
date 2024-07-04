@@ -9,8 +9,15 @@ import {
   YAxis,
 } from "recharts";
 import { chartData } from "../Markets/components/MarketsListing";
+import { CoinType } from "../MainWalltet";
 
-const WalletCharts = () => {
+// type WalletChartsProps = {
+//   name: String;
+//   currency: String;
+//   days: Number;
+// };
+
+const WalletCharts = ({ coinPrices }: CoinType) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
@@ -27,8 +34,9 @@ const WalletCharts = () => {
         {/* <CartesianGrid strokeDasharray="5 5" /> */}
         {/* <CartesianGrid /> */}
         {/* <XAxis dataKey="name" /> */}
+        <YAxis dataKey={"pv"} />
         <XAxis />
-        <YAxis />
+        {/* <YAxis /> */}
         <Tooltip content={<CustomTooltip />} />
         <Legend />
         <Area
