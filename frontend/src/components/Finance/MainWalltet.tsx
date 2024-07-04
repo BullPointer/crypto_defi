@@ -27,8 +27,8 @@ const MainWalltet = () => {
       });
       const newPrices = data.prices?.map((d: Array<Number>) => {
         return {
-          time: moment(Number(d[0])).format("MMMM DD YY"),
-          value: d[1],
+          time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
+          value: d[1].toFixed(2),
         };
       });
       const newTotalVolumes = data.total_volumes?.map((d: Array<Number>) => {

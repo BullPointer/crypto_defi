@@ -5,7 +5,7 @@ import {
   Legend,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
+  // XAxis,
   YAxis,
 } from "recharts";
 // import { CoinType } from "../MainWalltet";
@@ -57,7 +57,7 @@ const WalletCharts = ({ coinPrices }: any) => {
 export default WalletCharts;
 
 const CustomTooltip = ({ active, payload, label }: any) => {
-  console.log("The payload is said to be: ", payload);
+  console.log("label: ", label);
 
   if (active && payload && payload.length) {
     return (
