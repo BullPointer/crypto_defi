@@ -70,22 +70,27 @@ const MarketsListing = () => {
     <div className="w-[80%] mx-auto p-8 rounded-lg bg-[#01020e63]">
       <div></div>
       <div className="grid grid-cols-9">
-        {["Coin name", "Coin Price", "Total Supply", "4", "5", "Chart"]?.map(
-          (header, idx) => (
-            <div
-              key={idx}
-              className="first:col-span-2 last:col-span-2 
+        {[
+          "Coin name",
+          "Coin Price",
+          "Total Supply",
+          "24h Price Change",
+          "5",
+          "Chart",
+        ]?.map((header, idx) => (
+          <div
+            key={idx}
+            className="first:col-span-2 last:col-span-2 
               flex items-center justify-start text-xs p-2 
-              "
-            >
-              <span className="cursor-pointer">{header}</span>
-              <Icon
-                className="text-[1.2rem] cursor-pointer"
-                icon={"material-symbols:arrow-drop-up-rounded"}
-              />
-            </div>
-          )
-        )}
+              [&:nth-child(3)]:col-span-2"
+          >
+            <span className="cursor-pointer">{header}</span>
+            <Icon
+              className="text-[1.2rem] cursor-pointer"
+              icon={"material-symbols:arrow-drop-up-rounded"}
+            />
+          </div>
+        ))}
       </div>
       {coins?.map((data, idx) => (
         <div
@@ -115,7 +120,9 @@ const MarketsListing = () => {
           <span className="col-span-2 px-2 py-4 pr-3">
             ${Number(data.total_supply).toFixed(2)}
           </span>
-          <div className="px-2 py-4">$0.003</div>
+          <div className="px-2 py-4">
+            ${Number(data.price_change_24h).toFixed(2)}
+          </div>
           <div className="px-2 py-4">$0.003</div>
           {/* <div className="col-span-2 px-2 py-4">chart</div> */}
           <ResponsiveContainer width="100%" height="100%">
