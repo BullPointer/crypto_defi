@@ -8,8 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { chartData } from "../Markets/components/MarketsListing";
-import { CoinType } from "../MainWalltet";
+// import { CoinType } from "../MainWalltet";
 
 // type WalletChartsProps = {
 //   name: String;
@@ -17,8 +16,8 @@ import { CoinType } from "../MainWalltet";
 //   days: Number;
 // };
 
-const WalletCharts = ({ coinPrices }: CoinType[]) => {
-  console.log("I have data to be", coinPrices);
+const WalletCharts = ({ coinPrices }: any) => {
+  // console.log("I have data to be", coinPrices);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -36,8 +35,9 @@ const WalletCharts = ({ coinPrices }: CoinType[]) => {
         {/* <CartesianGrid strokeDasharray="5 5" /> */}
         {/* <CartesianGrid /> */}
         {/* <XAxis dataKey="name" /> */}
-        {/* <YAxis dataKey={""} /> */}
-        <XAxis />
+        <YAxis dataKey={"value"} />
+        {/* <XAxis dataKey={"time"} /> */}
+        {/* <XAxis /> */}
         {/* <YAxis /> */}
         <Tooltip content={<CustomTooltip />} />
         <Legend />
@@ -57,17 +57,25 @@ const WalletCharts = ({ coinPrices }: CoinType[]) => {
 export default WalletCharts;
 
 const CustomTooltip = ({ active, payload, label }: any) => {
+  console.log("The payload is said to be: ", payload);
+
   if (active && payload && payload.length) {
     return (
       <div
         className="p-2 bg-slate-900 flex flex-col 
             gap-2 rounded-md"
       >
-        <p className="text-medium text-sm md:text-lg">{label}</p>
+        <p className="text-medium text-sm md:text-lg">
+          {payload[0].payload.time}
+        </p>
         <p className="text-xs md:text-sm text-blue-400">
-          Product 1:
+          Bitcoin Price:
           <span className="ml-2">${payload[0].value}</span>
         </p>
+        {/* <p className="text-xs md:text-sm text-blue-400">
+          Bitcoin Time:
+          <span className="ml-2">{payload[0].payload.time}</span>
+        </p> */}
       </div>
     );
   }

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { WalletHeader, WalletHistory } from ".";
 import WalletCharts from "./components/WalletCharts";
 import { getCoinDataByIdApi } from "../../handleApi/coingeckoApi";
+import moment from "moment";
 
 // [[1720102558000, 57194.5614298522]]
 export type CoinType = {
-  time: Number;
-  value: Number | String;
+  time: number | any;
+  value: number;
 };
 
 const MainWalltet = () => {
@@ -26,7 +27,7 @@ const MainWalltet = () => {
       });
       const newPrices = data.prices?.map((d: Array<Number>) => {
         return {
-          time: d[0],
+          time: moment(Number(d[0])).format("MMMM DD YY"),
           value: d[1],
         };
       });
@@ -38,8 +39,12 @@ const MainWalltet = () => {
       });
 
       setCoinPrices(newPrices);
-      setCoinMarketCaps(coinMarketCaps);
-      setCoinTotalVolumes(coinTotalVolumes);
+      setCoinMarketCaps(newMarketCaps);
+      setCoinTotalVolumes(newTotalVolumes);
+
+      const d = new Date(newPrices[0].time);
+      d.setTime(d.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
+      console.log("The presented date d is: ", d);
 
       // console.log("The newMarketCaps data ", newMarketCaps);
       // console.log("The newPrices data ", typeof newPrices);
@@ -54,10 +59,14 @@ const MainWalltet = () => {
   return (
     <div>
       <div
-        className="grid grid-cols-1 lg:grid-cols-2 
+        className="grid grid-cols-1 lg:grid-cols-1 
       my-20 md:my-28"
       >
-        <WalletCharts coinPrices={coinPrices} />
+        <WalletCharts
+          coinPrices={coinPrices}
+          coinMarketCaps={coinMarketCaps}
+          coinTotalVolumes={coinTotalVolumes}
+        />
         <WalletHeader />
       </div>
       <WalletHistory />
