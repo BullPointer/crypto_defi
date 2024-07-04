@@ -10,15 +10,7 @@ import {
 } from "recharts";
 // import { CoinType } from "../MainWalltet";
 
-// type WalletChartsProps = {
-//   name: String;
-//   currency: String;
-//   days: Number;
-// };
-
 const WalletCharts = ({ coinPrices }: any) => {
-  // console.log("I have data to be", coinPrices);
-
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
@@ -36,9 +28,7 @@ const WalletCharts = ({ coinPrices }: any) => {
         {/* <CartesianGrid /> */}
         {/* <XAxis dataKey="name" /> */}
         <YAxis dataKey={"value"} />
-        {/* <XAxis dataKey={"time"} /> */}
         {/* <XAxis /> */}
-        {/* <YAxis /> */}
         <Tooltip content={<CustomTooltip />} />
         <Legend />
         <Area
@@ -47,7 +37,6 @@ const WalletCharts = ({ coinPrices }: any) => {
           dataKey="value"
           stroke="#8884d8"
           fill="#2a293f"
-          //   fill="#8884d8"
         />
       </AreaChart>
     </ResponsiveContainer>
@@ -71,10 +60,6 @@ const CustomTooltip = ({ active, payload }: any) => {
           Bitcoin Price:
           <span className="ml-2">${payload[0].value}</span>
         </p>
-        {/* <p className="text-xs md:text-sm text-blue-400">
-          Bitcoin Time:
-          <span className="ml-2">{payload[0].payload.time}</span>
-        </p> */}
       </div>
     );
   }

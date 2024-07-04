@@ -1,6 +1,8 @@
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { useEffect, useState } from "react";
 
 import { LineChart, Line, ResponsiveContainer } from "recharts";
+import { getPopularCoinApi } from "../../../../handleApi/coingeckoApi";
 
 export const chartData = [
   {
@@ -48,11 +50,27 @@ export const chartData = [
 ];
 
 const MarketsListing = () => {
+  const [coins, setCoins] = useState([]);
+
+  const popularCoin = async () => {
+    try {
+      const { data } = await getPopularCoinApi();
+      setCoins(data);
+      console.log("Coins list: ", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    popularCoin();
+  }, []);
+
   return (
     <div className="w-[80%] mx-auto p-8 rounded-lg bg-[#01020e63]">
       <div></div>
-      <div className="grid grid-cols-8">
-        {["Coin name", "Coin Price", "3", "4", "5", "Chart"]?.map(
+      <div className="grid grid-cols-9">
+        {["Coin name", "Coin Price", "Total Supply", "4", "5", "Chart"]?.map(
           (header, idx) => (
             <div
               key={idx}
@@ -69,9 +87,9 @@ const MarketsListing = () => {
           )
         )}
       </div>
-      {["1", "2", "3", "4", "5"]?.map((data, idx) => (
+      {coins?.map((data, idx) => (
         <div
-          className="grid grid-cols-8 text-[0.9rem] 
+          className="grid grid-cols-9 text-[0.9rem] 
         hover:bg-n-8 cursor-pointer"
           key={idx}
         >
@@ -82,20 +100,22 @@ const MarketsListing = () => {
             <span className="flex items-center gap-1">
               <Icon
                 className="text-[1.3rem] "
-                icon={"cryptocurrency-color:btc"}
+                icon={`cryptocurrency-color:${data.symbol}`}
               />
-              <span className="text-wrap px-1">Bitcoin</span>
+              <span className="text-wrap px-1 text-wrap">{data.name}</span>
             </span>
             <span
               className="text-[0.55rem] border border-slate-500 
             rounded-md px-3 py-1"
             >
-              BTC
+              {data.symbol.toUpperCase()}
             </span>
           </div>
+          <div className="px-2 py-4">${data.current_price}</div>
+          <span className="col-span-2 px-2 py-4 pr-3">
+            ${Number(data.total_supply).toFixed(2)}
+          </span>
           <div className="px-2 py-4">$0.003</div>
-          <div className="px-2 py-4">$0.003</div>
-          <div className="px-2 py-4">$0.003{data}cc</div>
           <div className="px-2 py-4">$0.003</div>
           {/* <div className="col-span-2 px-2 py-4">chart</div> */}
           <ResponsiveContainer width="100%" height="100%">
