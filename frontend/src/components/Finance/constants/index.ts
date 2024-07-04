@@ -1,3 +1,11 @@
+export const financeFooterData = [
+    { text: "Privacy Policy", link: "/privacy-policy" },
+    { text: "Disclosure", link: "/disclosure" },
+
+    { text: "Terms and Conditions", link: "/terms-and-conditions" },
+    { text: "Help", link: "/help" },
+]
+
 export const accountData = [
     {
         _id: 0,
@@ -201,16 +209,5 @@ export const portfolioListingData = [
         currencyPercentageRate: "0.22%",
 
     },
-    {
-        _id: 2,
-        icon: "cryptocurrency-color:usd",
-        currency: "USD",
-        currencyAbbriev: "usd",
-        currencyBalance: 0.00,
-        usdBalance: 0.00,
-        eurBalance: 0.00,
-        currencyPrice: 111111.53,
-        currencyPercentageRate: "0.05%",
 
-    },
 ]

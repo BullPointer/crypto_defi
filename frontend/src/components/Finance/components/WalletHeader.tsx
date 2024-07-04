@@ -37,8 +37,8 @@ const WalletHeader = () => {
 
   return (
     <div
-      className="h-auto border border-n-6 rounded-xl py-5 mt-10 
-      "
+      className="h-auto border border-n-6 rounded-xl py-5 
+      mt-10"
     >
       <div className="grid grid-cols-2 p-3">
         <ul className={`col-span-2 gap-1 mb-5 md:mb-3 ${commonStyle}`}>
@@ -49,7 +49,7 @@ const WalletHeader = () => {
             className="flex items-center text-[18px] 
             font-bold"
           >
-            {currencyData.currency}
+            {currencyData.name}
           </li>
         </ul>
         <ul className={`flex gap-5 item-center ${commonStyle}`}>

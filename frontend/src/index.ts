@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import HomePageTrends from "./components/HomePageTrends";
+import Markets from "./components/Finance/Markets/Markets";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -36,6 +37,7 @@ export {
     Homepage,
     HomePageTrends,
     HorizontalLine,
+    Markets,
     Navbar,
     NotFound,
     PrivacyPolicy,

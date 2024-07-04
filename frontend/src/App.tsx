@@ -13,6 +13,7 @@ import {
   Profile,
   Signup,
   Signin,
+  Markets,
 } from ".";
 import {
   Account,
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="borrow" element={<Portfolio />} />
         <Route path="exchange" element={<Portfolio />} />
         <Route path="lend" element={<Portfolio />} />
+        <Route path="markets" element={<Markets />} />
         <Route path="profile" element={<Profile />}>
           <Route path="*" index element={<Account />} />
           <Route path="account" element={<Account />} />

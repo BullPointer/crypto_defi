@@ -1,29 +1,28 @@
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { Link } from "react-router-dom";
 
 export type PortfolioListingPropsType = {
-  _id?: Number;
-  currency: String;
-  currencyAbbriev: String;
+  id?: Number;
+  name: String;
+  symbol: String;
   currencyBalance: Number;
-  currencyPrice: Number;
-  currencyPercentageRate: String;
-  eurBalance?: Number;
-  icon: string | any;
-  usdBalance: Number;
+  current_price: Number;
+  price_change_percentage_24h: String;
+  eur_balance?: Number;
+  image: string | any;
+  usd_balance: Number;
 };
 
 const PortfolioListing = ({
-  currency,
-  currencyAbbriev,
+  name,
+  symbol,
   currencyBalance,
-  currencyPercentageRate,
-  currencyPrice,
-  icon,
-  usdBalance,
+  price_change_percentage_24h,
+  current_price,
+  image,
+  usd_balance,
 }: PortfolioListingPropsType) => {
   return (
-    <Link to={String(currencyAbbriev).toLowerCase()}>
+    <Link to={String(symbol).toLowerCase()}>
       <div
         className="flex justify-between my-2 text-sm sm:text-[16px]
       transition-scale duration-500 hover:scale-105 md:text-[14px] 
@@ -32,21 +31,21 @@ const PortfolioListing = ({
       >
         <ul className="flex gap-5 item-center">
           <li className="flex items-center ">
-            <Icon className="text-[2rem]" icon={icon} />
+            <img className="w-5 h-5 sm:w-10 sm:h-10 text-[2rem]" src={image} />
           </li>
           <li
             className="flex items-center text-[18px] 
             font-bold"
           >
-            {currency}
+            {name}
           </li>
           <li className="flex flex-col justify-center">
             <div className="flex gap-1 text-xs">
-              <span>{Number(currencyBalance)}</span>
+              <span>{Number(currencyBalance) || 0}</span>
               <span>BTC</span>
             </div>
             <div className="flex gap-1 text-xs">
-              <span>{Number(usdBalance)}</span>
+              <span>{Number(usd_balance) || 0}</span>
               <span>USD</span>
             </div>
           </li>
@@ -54,11 +53,11 @@ const PortfolioListing = ({
         <ul>
           <li>
             <div className="flex gap-2">
-              <span>{Number(currencyPrice)}</span>
+              <span>{Number(current_price)}</span>
               <span>USD</span>
             </div>
             <div className={`text-red-500 text-xs`}>
-              {currencyPercentageRate}
+              {price_change_percentage_24h}
             </div>
           </li>
         </ul>

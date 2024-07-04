@@ -1,8 +1,25 @@
+import { useEffect, useState } from "react";
 import { Balance, PortfolioListing } from ".";
 import { ActionBtns } from "./Reusables/ActionBtns";
-import { portfolioListingData } from "./constants";
+import { getPopularCoinApi } from "../../handleApi/coingeckoApi";
 
 const Portfolio = () => {
+  const [coins, setCoins] = useState([]);
+
+  const popularCoin = async () => {
+    try {
+      const { data } = await getPopularCoinApi();
+      setCoins(data);
+      // console.log("Coins list: ", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    popularCoin();
+  }, []);
+
   return (
     <div className="px-10">
       <ActionBtns />
@@ -39,18 +56,19 @@ const Portfolio = () => {
         >
           Portfolio
         </section>
-        {portfolioListingData?.map((data, idx) => (
+
+        {coins?.map((data: any, idx) => (
           <PortfolioListing
             key={idx}
-            _id={data._id}
-            currency={data.currency}
-            currencyAbbriev={data.currencyAbbriev}
+            id={data.id}
+            name={data.name}
+            symbol={data.symbol}
             currencyBalance={data.currencyBalance}
-            currencyPercentageRate={data.currencyPercentageRate}
-            currencyPrice={data.currencyPrice}
-            eurBalance={data.eurBalance}
-            icon={data.icon}
-            usdBalance={data.usdBalance}
+            price_change_percentage_24h={data.price_change_percentage_24h}
+            current_price={data.current_price}
+            eur_balance={data.eur_balance}
+            image={data.image}
+            usd_balance={data.usd_balance}
           />
         ))}
       </div>
