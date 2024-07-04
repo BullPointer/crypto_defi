@@ -4,7 +4,6 @@ import WalletCharts from "./components/WalletCharts";
 import { getCoinDataByIdApi } from "../../handleApi/coingeckoApi";
 import moment from "moment";
 
-// [[1720102558000, 57194.5614298522]]
 export type CoinType = {
   time: number | any;
   value: number;
@@ -41,14 +40,6 @@ const MainWalltet = () => {
       setCoinPrices(newPrices);
       setCoinMarketCaps(newMarketCaps);
       setCoinTotalVolumes(newTotalVolumes);
-
-      const d = new Date(newPrices[0].time);
-      d.setTime(d.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
-      console.log("The presented date d is: ", d);
-
-      // console.log("The newMarketCaps data ", newMarketCaps);
-      // console.log("The newPrices data ", typeof newPrices);
-      // console.log("The newTotalVolumes data ", typeof newTotalVolumes);
     } catch (error) {
       console.log(error);
     }
@@ -59,8 +50,8 @@ const MainWalltet = () => {
   return (
     <div>
       <div
-        className="grid grid-cols-1 lg:grid-cols-1 
-      my-20 md:my-28"
+        className="grid grid-cols-1 lg:grid-cols-2 
+       my-20 md:my-28"
       >
         <WalletCharts
           coinPrices={coinPrices}

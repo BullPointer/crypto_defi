@@ -56,17 +56,16 @@ const WalletCharts = ({ coinPrices }: any) => {
 
 export default WalletCharts;
 
-const CustomTooltip = ({ active, payload, label }: any) => {
-  console.log("label: ", label);
-
+const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
+    const splitedTime = payload[0]?.payload.time.split(",");
     return (
       <div
         className="p-2 bg-slate-900 flex flex-col 
             gap-2 rounded-md"
       >
         <p className="text-medium text-sm md:text-lg">
-          {payload[0].payload.time}
+          {splitedTime[0]} <span className="text-xs">{splitedTime[1]}</span>
         </p>
         <p className="text-xs md:text-sm text-blue-400">
           Bitcoin Price:

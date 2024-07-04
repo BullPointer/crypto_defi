@@ -38,7 +38,7 @@ const WalletHeader = () => {
   return (
     <div
       className="h-auto border border-n-6 rounded-xl py-5 
-      mt-10"
+       mb-10 md:mb-0 mt-10 order-first md:order-last"
     >
       <div className="grid grid-cols-2 p-3">
         <ul className={`col-span-2 gap-1 mb-5 md:mb-3 ${commonStyle}`}>
