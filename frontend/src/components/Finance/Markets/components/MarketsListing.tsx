@@ -59,8 +59,23 @@ const MarketsListing = () => {
   const popularCoin = async () => {
     try {
       const { data } = await getPopularCoinApi();
+
       setCoins(data);
-      console.log("Coins list: ", data);
+
+      const { data: coinDataById } = await getCoinDataByIdApi(
+        "ethereum",
+        "usd",
+        60,
+        "daily"
+      );
+
+      const filteredData = coinDataById.prices?.map((d: Array<Number>) => {
+        return {
+          time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
+          value: d[1].toFixed(2),
+        };
+      });
+      console.log("Expected data is: ", filteredData);
     } catch (error) {
       console.log(error);
     }
@@ -69,28 +84,6 @@ const MarketsListing = () => {
   useEffect(() => {
     popularCoin();
   }, []);
-
-  const coinByIdData = async (name: String) => {
-    if (name) {
-      try {
-        const { data } = await getCoinDataByIdApi(
-          "ethereum",
-          "usd",
-          60,
-          "daily"
-        );
-
-        return data.prices?.map((d: Array<Number>) => {
-          return {
-            time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
-            value: d[1].toFixed(2),
-          };
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   return (
     <div className="w-[80%] mx-auto p-8 rounded-lg bg-[#01020e63]">
@@ -155,14 +148,10 @@ const MarketsListing = () => {
           </div>
           {/* <div className="col-span-2 px-2 py-4">chart</div> */}
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              width={300}
-              height={100}
-              data={() => coinByIdData(data.name)}
-            >
+            <LineChart width={300} height={100} data={[]}>
               <Line
                 type="monotone"
-                dataKey="pv"
+                dataKey="value"
                 stroke="#8884d8"
                 strokeWidth={2}
                 dot={false}
