@@ -2,7 +2,11 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useEffect, useState } from "react";
 
 import { LineChart, Line, ResponsiveContainer } from "recharts";
-import { getPopularCoinApi } from "../../../../handleApi/coingeckoApi";
+import {
+  getCoinDataByIdApi,
+  getPopularCoinApi,
+} from "../../../../handleApi/coingeckoApi";
+import moment from "moment";
 
 export const chartData = [
   {
@@ -49,7 +53,7 @@ export const chartData = [
   },
 ];
 
-const MarketsListing = ({ coinPrices }: any) => {
+const MarketsListing = () => {
   const [coins, setCoins] = useState([]);
 
   const popularCoin = async () => {
@@ -65,6 +69,28 @@ const MarketsListing = ({ coinPrices }: any) => {
   useEffect(() => {
     popularCoin();
   }, []);
+
+  const coinByIdData = async (name: String) => {
+    if (name) {
+      try {
+        const { data } = await getCoinDataByIdApi(
+          "ethereum",
+          "usd",
+          60,
+          "daily"
+        );
+
+        return data.prices?.map((d: Array<Number>) => {
+          return {
+            time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
+            value: d[1].toFixed(2),
+          };
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className="w-[80%] mx-auto p-8 rounded-lg bg-[#01020e63]">
@@ -129,7 +155,11 @@ const MarketsListing = ({ coinPrices }: any) => {
           </div>
           {/* <div className="col-span-2 px-2 py-4">chart</div> */}
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart width={300} height={100} data={chartData}>
+            <LineChart
+              width={300}
+              height={100}
+              data={() => coinByIdData(data.name)}
+            >
               <Line
                 type="monotone"
                 dataKey="pv"
