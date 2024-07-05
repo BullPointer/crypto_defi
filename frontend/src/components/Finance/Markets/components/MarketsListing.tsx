@@ -62,20 +62,26 @@ const MarketsListing = () => {
 
       setCoins(data);
 
-      const { data: coinDataById } = await getCoinDataByIdApi(
-        "ethereum",
-        "usd",
-        60,
-        "daily"
-      );
+      if (data) {
+        data.forEach(async (list: any) => {
+          const response = await getCoinDataByIdApi(
+            // String(list.name),
+            "bitcoin",
+            "usd",
+            60,
+            "daily"
+          );
 
-      const filteredData = coinDataById.prices?.map((d: Array<Number>) => {
-        return {
-          time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
-          value: d[1].toFixed(2),
-        };
-      });
-      console.log("Expected data is: ", filteredData);
+          const filteredData = response.data.prices?.map((d: Array<Number>) => {
+            return {
+              time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
+              value: d[1].toFixed(2),
+              name: "bitcoin",
+            };
+          });
+          console.log("Expected data is: ", response);
+        });
+      }
     } catch (error) {
       console.log(error);
     }
