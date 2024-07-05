@@ -49,7 +49,7 @@ export const chartData = [
   },
 ];
 
-const MarketsListing = () => {
+const MarketsListing = ({ coinPrices }: any) => {
   const [coins, setCoins] = useState([]);
 
   const popularCoin = async () => {
@@ -88,7 +88,7 @@ const MarketsListing = () => {
           </div>
         ))}
       </div>
-      {coins?.map((data, idx) => (
+      {coins?.map((data: any, idx) => (
         <div
           className="grid grid-cols-9 text-[0.9rem] 
         hover:bg-n-8 cursor-pointer"
@@ -103,7 +103,7 @@ const MarketsListing = () => {
                 className="text-[1.3rem] "
                 icon={`cryptocurrency-color:${data.symbol}`}
               />
-              <span className="text-wrap px-1 text-wrap">{data.name}</span>
+              <span className="text-wrap px-1">{data.name}</span>
             </span>
             <span
               className="text-[0.55rem] border border-slate-500 

@@ -16,7 +16,12 @@ const MainWalltet = () => {
 
   const fetchCoinDataByIdApi = async () => {
     try {
-      const { data } = await getCoinDataByIdApi("ethereum", "usd", 1);
+      const { data } = await getCoinDataByIdApi(
+        "ethereum",
+        "usd",
+        365,
+        "daily"
+      );
 
       const newMarketCaps = data.market_caps?.map((d: Array<Number>) => {
         return {
