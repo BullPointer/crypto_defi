@@ -55,6 +55,7 @@ export const chartData = [
 
 const MarketsListing = () => {
   const [coins, setCoins] = useState([]);
+  const [coinsById, setCoinsById] = useState({ Bitcoin: [] } as any);
 
   const popularCoin = async () => {
     try {
@@ -64,32 +65,59 @@ const MarketsListing = () => {
 
       if (data) {
         data.forEach(async (list: any) => {
-          const response = await getCoinDataByIdApi(
-            // String(list.name),
-            "bitcoin",
-            "usd",
-            60,
-            "daily"
-          );
+          try {
+            const response = await getCoinDataByIdApi(
+              String(list.name.toLowerCase()),
+              // "bitcoin",
+              "usd",
+              60,
+              "daily"
+            );
 
-          const filteredData = response.data.prices?.map((d: Array<Number>) => {
-            return {
-              time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
-              value: d[1].toFixed(2),
-              name: "bitcoin",
-            };
-          });
-          console.log("Expected data is: ", response);
+            if (response.status === 200) {
+              const filteredData = response.data.prices?.map(
+                (d: Array<Number>) => {
+                  return {
+                    time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
+                    value: d[1].toFixed(2),
+                    name: list.name,
+                  };
+                }
+              );
+
+              const coinsByIdDemo = coinsById;
+              if (
+                // coinsById !== undefined
+                coinsById[list.name] &&
+                coinsById[list.name].length > 0
+              ) {
+                coinsByIdDemo[list.name] = [
+                  ...coinsByIdDemo[list.name],
+                  ...filteredData,
+                ];
+                setCoinsById(coinsByIdDemo);
+              } else {
+                coinsByIdDemo[list.name] = filteredData;
+                setCoinsById(coinsByIdDemo);
+              }
+              console.log("coinsById: ", coinsById);
+            }
+          } catch (error) {}
         });
       }
     } catch (error) {
       console.log(error);
     }
   };
+  const coinChartData = async () => {};
 
   useEffect(() => {
     popularCoin();
   }, []);
+  useEffect(() => {
+    coinChartData();
+  }, [coinsById]);
+  console.log("coinsById: ", coinsById);
 
   return (
     <div className="w-[80%] mx-auto p-8 rounded-lg bg-[#01020e63]">
@@ -154,7 +182,7 @@ const MarketsListing = () => {
           </div>
           {/* <div className="col-span-2 px-2 py-4">chart</div> */}
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart width={300} height={100} data={[]}>
+            <LineChart width={300} height={100} data={coinsById[data.name]}>
               <Line
                 type="monotone"
                 dataKey="value"
