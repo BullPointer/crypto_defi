@@ -6,6 +6,7 @@ import FinanceNavbar from "./components/FinanceNavbar";
 import FinanceFooter from "./components/FinanceFooter";
 import Finance from "./pages/Finance";
 import Footer from "./components/Footer";
+import Governance from "./components/Finance/Governance/Governance";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import HomePageTrends from "./components/HomePageTrends";
@@ -33,6 +34,7 @@ export {
     FinanceNavbar,
     FinanceFooter,
     Footer,
+    Governance,
     Header,
     Homepage,
     HomePageTrends,

@@ -14,6 +14,7 @@ import {
   Signup,
   Signin,
   Markets,
+  Governance,
 } from ".";
 import {
   Account,
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="exchange" element={<Portfolio />} />
         <Route path="lend" element={<Portfolio />} />
         <Route path="markets" element={<Markets />} />
+        <Route path="governance" element={<Governance />} />
         <Route path="profile" element={<Profile />}>
           <Route path="*" index element={<Account />} />
           <Route path="account" element={<Account />} />

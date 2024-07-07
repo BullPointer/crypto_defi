@@ -8,51 +8,6 @@ import {
 } from "../../../../handleApi/coingeckoApi";
 import moment from "moment";
 
-export const chartData = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
 const MarketsListing = () => {
   const [coins, setCoins] = useState([]);
   const [coinsById, setCoinsById] = useState({ Bitcoin: [] } as any);
@@ -62,61 +17,52 @@ const MarketsListing = () => {
       const { data } = await getPopularCoinApi();
 
       setCoins(data);
-
-      if (data) {
-        data.forEach(async (list: any) => {
-          try {
-            const response = await getCoinDataByIdApi(
-              String(list.name.toLowerCase()),
-              // "bitcoin",
-              "usd",
-              60,
-              "daily"
-            );
-
-            if (response.status === 200) {
-              const filteredData = response.data.prices?.map(
-                (d: Array<Number>) => {
-                  return {
-                    time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
-                    value: d[1].toFixed(2),
-                    name: list.name,
-                  };
-                }
-              );
-
-              const coinsByIdDemo = coinsById;
-              if (
-                // coinsById !== undefined
-                coinsById[list.name] &&
-                coinsById[list.name].length > 0
-              ) {
-                coinsByIdDemo[list.name] = [
-                  ...coinsByIdDemo[list.name],
-                  ...filteredData,
-                ];
-                setCoinsById(coinsByIdDemo);
-              } else {
-                coinsByIdDemo[list.name] = filteredData;
-                setCoinsById(coinsByIdDemo);
-              }
-              console.log("coinsById: ", coinsById);
-            }
-          } catch (error) {}
-        });
-      }
     } catch (error) {
       console.log(error);
     }
   };
-  const coinChartData = async () => {};
+  const coinChartData = async () => {
+    if (coins.length > 0) {
+      coins.forEach(async (list: any) => {
+        try {
+          const response = await getCoinDataByIdApi(
+            String(list.name.toLowerCase()),
+            "usd",
+            10,
+            "daily"
+          );
+
+          const filteredData = response.data.prices?.map((d: Array<Number>) => {
+            return {
+              time: moment(Number(d[0])).format("MMMM DD YY, hh:mm:ss"),
+              value: d[1].toFixed(2),
+              name: list.name,
+            };
+          });
+
+          const coinsByIdDemo = coinsById;
+          if (coinsById[list.name] && coinsById[list.name].length > 0) {
+            coinsByIdDemo[list.name] = [
+              ...coinsByIdDemo[list.name],
+              ...filteredData,
+            ];
+            setCoinsById(coinsByIdDemo);
+          } else {
+            coinsByIdDemo[list.name] = filteredData;
+            setCoinsById(coinsByIdDemo);
+          }
+          console.log("coinsById: ", coinsById);
+        } catch (error) {}
+      });
+    }
+  };
 
   useEffect(() => {
     popularCoin();
   }, []);
   useEffect(() => {
     coinChartData();
-  }, [coinsById]);
+  }, [coinsById, coins]);
   console.log("coinsById: ", coinsById);
 
   return (
@@ -181,17 +127,19 @@ const MarketsListing = () => {
             </span>
           </div>
           {/* <div className="col-span-2 px-2 py-4">chart</div> */}
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart width={300} height={100} data={coinsById[data.name]}>
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="#8884d8"
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          {coinsById[data.name] && (
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart width={300} height={100} data={coinsById[data.name]}>
+                <Line
+                  type="monotone"
+                  dataKey="value"
+                  stroke="#8884d8"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
         </div>
       ))}
     </div>
