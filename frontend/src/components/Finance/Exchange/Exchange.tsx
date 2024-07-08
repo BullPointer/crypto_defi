@@ -15,16 +15,18 @@ const Exchange = () => {
 
   const commonStyle = "flex flex-row justify-center items-center";
   const exchangeStyle =
-    "p-2 text-[12px] font-[700] border-x border-n-5 cursor-pointer hover:text-slate-400";
+    "p-2 text-[12px] font-[700] border-x border-n-5 cursor-pointer hover:text-slate-600";
   return (
     <>
       <div className="">
         <div className="max-w-[800px] rounded-[25px] text-center my-[20px] mx-auto px-[10px] py-5 text-[#fff]">
-          <div className="text-[#fff] text-3xl p-2 my-10">Exchange</div>
+          <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
+            Exchange
+          </div>
 
           <div
             className="h-auto left-10 w-[90%] mx-auto text-white 
-          shadow-lg rounded-lg border border-n-8 p-5"
+          shadow-lg shadow-slate-950 rounded-lg border border-n-8 p-5"
           >
             <div className={`${commonStyle}`}>
               <div
@@ -34,7 +36,7 @@ const Exchange = () => {
                 }}
                 className={`${exchangeStyle} ${
                   exchangeType === "crypto-to-crypto"
-                    ? "bg-[#eeeeee] text-slate-400"
+                    ? "bg-[#eeeeee] text-[#3f3737b6]"
                     : ""
                 }`}
               >
@@ -47,7 +49,7 @@ const Exchange = () => {
                 }}
                 className={`${exchangeStyle} ${
                   exchangeType === "fiat-to-crypto"
-                    ? "bg-[#eeeeee] text-slate-400"
+                    ? "bg-[#eeeeee] text-[#3f3737b6]"
                     : ""
                 } `}
               >
@@ -59,6 +61,7 @@ const Exchange = () => {
               type={"send"}
               exchangeType={exchangeType}
               loading={loading}
+              symbol={"BTC"}
             />
             {error && (
               <div className="text-[14px] text-[#be5959] px-2 py-1 font-serif">
@@ -73,10 +76,11 @@ const Exchange = () => {
               type={"receive"}
               exchangeType={exchangeType}
               loading={loading}
+              symbol={"ETH"}
             />
             <div className="w-full mb-2 mt-5">
               <div className="my-2">
-                <div className="text-[#1b2a8b] text-[14px] sm:text-[17px]  p-2">
+                <div className="text-[#1b2a8bc0] text-[14px] sm:text-[17px] italic p-2">
                   Enter the wallet address
                 </div>
                 <div className="text-[#12205fb2] text-lg font-bold"></div>
@@ -100,7 +104,7 @@ const Exchange = () => {
 
             <div
               //   onClick={handleExchange}
-              className={`bg-[#ff4b12] cursor-pointer text-white ${commonStyle} p-2 m-2 rounded font-[500]`}
+              className={`bg-[#ff4b12] cursor-pointer text-white font-bold ${commonStyle} p-2 m-2 rounded font-[500]`}
             >
               Exchange
             </div>

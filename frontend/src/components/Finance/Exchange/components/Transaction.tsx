@@ -4,7 +4,7 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 /* eslint-disable react/prop-types */
 
-const Transaction = ({ title, type, exchangeType, loading }) => {
+const Transaction = ({ title, type, exchangeType, loading, symbol }) => {
   const border = "border border-n-5";
   return (
     <div className="relative grid grid-cols-2 justify-center items-center  mt-2">
@@ -40,10 +40,10 @@ const Transaction = ({ title, type, exchangeType, loading }) => {
           <li className="pr-2">
             <img src={""} alt="" />
           </li>
-          <li className="">{"transactionObj.symbol.toUpperCase()"}</li>
+          <li className="font-bold">{symbol}</li>
         </ul>
         <div>
-          <Icon icon="mdi:arrow-down-drop" />
+          <Icon className="text-[1.5rem]" icon="mdi:arrow-down-drop" />
         </div>
       </div>
       {/* {showCurrencies[type] && (
