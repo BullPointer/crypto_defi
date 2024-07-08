@@ -2,6 +2,7 @@ import Blog from "./pages/Blog";
 import BlogListing from "./components/Blogs/BlogListing";
 import BlogDisplay from "./components/Blogs/BlogDisplay";
 import CurrencyWallet from "./pages/CurrencyWallet";
+import Exchange from "./components/Finance/Exchange/Exchange";
 import FinanceNavbar from "./components/FinanceNavbar";
 import FinanceFooter from "./components/FinanceFooter";
 import Finance from "./pages/Finance";
@@ -30,6 +31,7 @@ export {
     BlogDisplay,
     BlogListing,
     CurrencyWallet,
+    Exchange,
     Finance,
     FinanceNavbar,
     FinanceFooter,

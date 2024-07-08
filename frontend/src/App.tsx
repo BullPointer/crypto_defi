@@ -15,6 +15,7 @@ import {
   Signin,
   Markets,
   Governance,
+  Exchange,
 } from ".";
 import {
   Account,
@@ -25,9 +26,6 @@ import {
   PersonalInfo,
   ReferToEarn,
 } from "./components/Finance";
-
-// https://coinloan.io/ https://saltlending.com/
-// https://icones.js.org/collection/all
 
 const App = () => {
   return (
@@ -46,7 +44,7 @@ const App = () => {
       <Route path="fi" element={<Finance />}>
         <Route path="*" index element={<Portfolio />} />
         <Route path="borrow" element={<Portfolio />} />
-        <Route path="exchange" element={<Portfolio />} />
+        <Route path="exchange" element={<Exchange />} />
         <Route path="lend" element={<Portfolio />} />
         <Route path="markets" element={<Markets />} />
         <Route path="governance" element={<Governance />} />
