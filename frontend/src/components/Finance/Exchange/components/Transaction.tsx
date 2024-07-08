@@ -29,7 +29,7 @@ const Transaction = ({ title, type, exchangeType, loading, symbol }) => {
             />
           </div>
         ) : (
-          <div className="text-lg pl-2 ">{"transactionObj.amount"}</div>
+          <div className="text-lg pl-2 ">{"7.56299295"}</div>
         )}
       </div>
       <div
@@ -42,7 +42,7 @@ const Transaction = ({ title, type, exchangeType, loading, symbol }) => {
           </li>
           <li className="font-bold">{symbol}</li>
         </ul>
-        <div>
+        <div className="flex items-center justify-center border rounded-full">
           <Icon className="text-[1.5rem]" icon="mdi:arrow-down-drop" />
         </div>
       </div>
