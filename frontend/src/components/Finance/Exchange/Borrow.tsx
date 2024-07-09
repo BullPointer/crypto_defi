@@ -3,6 +3,7 @@ import Transaction from "./components/Transaction";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useEffect, useState } from "react";
 import TransactionHeader from "./components/TransactionHeader";
+import BorrowTransaction from "./components/BorrowTransaction";
 
 const Borrow = () => {
   const [exchangeType, setExchangeType] = useState("crypto-to-crypto");
@@ -58,22 +59,8 @@ const Borrow = () => {
                 Buy/Sell Crypto
               </div>
             </div>
-            <Transaction
-              title={"You Send"}
-              type={"send"}
-              exchangeType={exchangeType}
-              loading={loading}
-              symbol={"BTC"}
-            />
-            {error && (
-              <div className="text-[14px] text-[#be5959] px-2 py-1 font-serif">
-                {error}
-              </div>
-            )}
-            <div className={`text-[#ff4b12] w-full ${commonStyle} p-1`}>
-              <Icon icon="gg:arrows-exchange-alt-v" />
-            </div>
-            <Transaction
+
+            <BorrowTransaction
               title={"You Recieve"}
               type={"receive"}
               exchangeType={exchangeType}
@@ -83,33 +70,30 @@ const Borrow = () => {
             <div className="w-full mb-2 mt-5">
               <div className="my-2">
                 <div className="text-[#1b2a8bc0] text-[14px] sm:text-[17px] italic p-2">
-                  Enter the wallet address
+                  {true
+                    ? "Connect to your wallet address"
+                    : "Enter the wallet address"}
                 </div>
                 <div className="text-[#12205fb2] text-lg font-bold"></div>
               </div>
-              <div className="w-full h-[100%] text-lg ">
-                <input
-                  placeholder="Receipient's address"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setReceipient(e.target.value)
-                  }
-                  className="w-full outline-none pl-2 py-2 text-center"
-                  type="text"
-                  name={"addressTo"}
-                  value={receipient}
-                />
-                <p className="text-red-500 text-xs py-4">
-                  Invalid {"receive.symbol"} address
-                </p>
-              </div>
             </div>
 
-            <div
-              //   onClick={handleExchange}
-              className={`bg-[#ff4b12] cursor-pointer text-white font-bold ${commonStyle} p-2 m-2 rounded font-[500]`}
-            >
-              Exchange
-            </div>
+            {true ? (
+              <div
+                //   onClick={handleExchange}
+                className={`bg-gradient-to-r 
+          from-slate-500 to-red-300 cursor-pointer text-white font-bold ${commonStyle} p-2 m-2 rounded font-[500]`}
+              >
+                Connect Wallet
+              </div>
+            ) : (
+              <div
+                //   onClick={handleExchange}
+                className={`bg-[#ff4b12] cursor-pointer text-white font-bold ${commonStyle} p-2 m-2 rounded font-[500]`}
+              >
+                Proceed
+              </div>
+            )}
             <p className=" p-2 text-xs sm:text-xs">
               By clicking <span className="text-slate-400"> Exchange</span>, I
               agree to the{" "}
