@@ -2,9 +2,20 @@
 
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
-/* eslint-disable react/prop-types */
-
-const Transaction = ({ title, type, exchangeType, loading, symbol }) => {
+type TransactionProps = {
+  title: String;
+  type: String;
+  exchangeType: String;
+  loading: Number;
+  symbol: String;
+};
+const Transaction = ({
+  title,
+  type,
+  exchangeType,
+  loading,
+  symbol,
+}: TransactionProps) => {
   const border = "border border-n-5";
   return (
     <div className="relative grid grid-cols-2 justify-center items-center  mt-2">

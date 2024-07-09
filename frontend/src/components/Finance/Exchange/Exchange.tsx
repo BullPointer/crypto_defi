@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import Transaction from "./components/Transaction";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useEffect, useState } from "react";
+import TransactionHeader from "./components/TransactionHeader";
 
 const Exchange = () => {
   const [exchangeType, setExchangeType] = useState("crypto-to-crypto");
   const [exchangeError, setExchangeError] = useState("crypto-to-crypto");
-  const [receipient, setReceipient] = useState();
-  const [loading, setLoading] = useState();
+  const [receipient, setReceipient] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
     document.title = "Exchange Details";
@@ -19,10 +20,11 @@ const Exchange = () => {
   return (
     <>
       <div className="">
+        <TransactionHeader />
         <div className="max-w-[800px] rounded-[25px] text-center my-[20px] mx-auto px-[10px] py-5 text-[#fff]">
-          <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
+          {/* <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
             Exchange
-          </div>
+          </div> */}
 
           <div
             className="h-auto left-10 w-[90%] mx-auto text-white 
@@ -88,7 +90,7 @@ const Exchange = () => {
               <div className="w-full h-[100%] text-lg ">
                 <input
                   placeholder="Receipient's address"
-                  onChange={(e: React.ChangeEvent<HTMLElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setReceipient(e.target.value)
                   }
                   className="w-full outline-none pl-2 py-2 text-center"
