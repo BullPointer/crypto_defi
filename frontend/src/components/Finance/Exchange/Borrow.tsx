@@ -61,7 +61,7 @@ const Borrow = () => {
             </div>
 
             <BorrowTransaction
-              title={"You Recieve"}
+              title={"Borrow APY"}
               type={"receive"}
               exchangeType={exchangeType}
               loading={loading}
