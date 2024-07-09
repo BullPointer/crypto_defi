@@ -20,7 +20,7 @@ const Exchange = () => {
   return (
     <>
       <div className="">
-        <TransactionHeader />
+        <TransactionHeader header={"Exchange"} />
         <div className="max-w-[800px] rounded-[25px] text-center my-[20px] mx-auto px-[10px] py-5 text-[#fff]">
           {/* <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
             Exchange

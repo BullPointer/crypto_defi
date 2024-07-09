@@ -16,6 +16,8 @@ import {
   Markets,
   Governance,
   Exchange,
+  Lend,
+  Borrow,
 } from ".";
 import {
   Account,
@@ -43,9 +45,9 @@ const App = () => {
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="fi" element={<Finance />}>
         <Route path="*" index element={<Portfolio />} />
-        <Route path="borrow" element={<Portfolio />} />
+        <Route path="borrow" element={<Borrow />} />
         <Route path="exchange" element={<Exchange />} />
-        <Route path="lend" element={<Portfolio />} />
+        <Route path="lend" element={<Lend />} />
         <Route path="markets" element={<Markets />} />
         <Route path="governance" element={<Governance />} />
         <Route path="profile" element={<Profile />}>

@@ -1,6 +1,7 @@
 import Blog from "./pages/Blog";
 import BlogListing from "./components/Blogs/BlogListing";
 import BlogDisplay from "./components/Blogs/BlogDisplay";
+import Borrow from "./components/Finance/Exchange/Borrow";
 import CurrencyWallet from "./pages/CurrencyWallet";
 import Exchange from "./components/Finance/Exchange/Exchange";
 import FinanceNavbar from "./components/FinanceNavbar";
@@ -11,6 +12,7 @@ import Governance from "./components/Finance/Governance/Governance";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import HomePageTrends from "./components/HomePageTrends";
+import Lend from "./components/Finance/Exchange/Lend";
 import Markets from "./components/Finance/Markets/Markets";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
@@ -30,6 +32,7 @@ export {
     Blog,
     BlogDisplay,
     BlogListing,
+    Borrow,
     CurrencyWallet,
     Exchange,
     Finance,
@@ -41,6 +44,7 @@ export {
     Homepage,
     HomePageTrends,
     HorizontalLine,
+    Lend,
     Markets,
     Navbar,
     NotFound,
