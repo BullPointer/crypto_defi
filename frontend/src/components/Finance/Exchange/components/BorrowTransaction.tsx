@@ -45,6 +45,20 @@ const BorrowTransaction = ({ title, type }: TransactionProps) => {
 
         <div className="text-lg pl-2 ">{`7.56% APY`}</div>
       </div>
+      <div className={`${border} w-full `}>
+        <div className="text-[12px] opacity-50 ">{"Amount Supplied"}</div>
+
+        <div className={`${commonFlex} text-lg pl-2 `}>
+          <span>{`0.32`}</span>
+          <span>BTC</span>
+        </div>
+        <div className="text-sm pl-2 mt-1">{`$7.9902`}</div>
+      </div>
+      <div className={`${border} w-full `}>
+        <div className="text-[12px] opacity-50 ">{"Reward"}</div>
+
+        <div className="text-lg pl-2 ">{`$9000`}</div>
+      </div>
       <div></div>
     </div>
   );
