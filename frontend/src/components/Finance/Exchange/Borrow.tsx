@@ -78,7 +78,7 @@ const Borrow = () => {
               </div>
             </div>
 
-            {true ? (
+            {false ? (
               <div
                 //   onClick={handleExchange}
                 className={`bg-gradient-to-r 
