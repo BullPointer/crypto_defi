@@ -10,14 +10,22 @@ type TransactionProps = {
   symbol?: String;
 };
 const BorrowTransaction = ({ title, type }: TransactionProps) => {
+  const commonFlex = `flex justify-center items-center gap-2`;
   const border = "border border-n-5";
+
   return (
     <div className="w-full relative  justify-center items-center mt-2">
-      <div className="flex justify-center items-center gap-2 p-5">
+      <div className={`${commonFlex} p-5`}>
         <Icon className="text-[2rem]" icon={"cryptocurrency-color:btc"} />
         <div className="flex items-center gap-1">
           <span>Bitcoin</span>
           <span className="font-bold text-xs">(BTC)</span>
+        </div>
+        <div className={`${commonFlex} p-5`}>
+          <Icon
+            className="text-[1.8rem] cursor-pointer"
+            icon={"material-symbols:keyboard-arrow-down"}
+          />
         </div>
       </div>
       <div className="w-full h-[100%] text-lg mb-5">

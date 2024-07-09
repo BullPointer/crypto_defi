@@ -43,7 +43,7 @@ const Borrow = () => {
                     : ""
                 }`}
               >
-                Exchange Currency
+                BORROW
               </div>
               <div
                 onClick={() => {
@@ -56,7 +56,7 @@ const Borrow = () => {
                     : ""
                 } `}
               >
-                Buy/Sell Crypto
+                LEND
               </div>
             </div>
 
@@ -78,7 +78,7 @@ const Borrow = () => {
               </div>
             </div>
 
-            {false ? (
+            {true ? (
               <div
                 //   onClick={handleExchange}
                 className={`bg-gradient-to-r 
@@ -94,17 +94,6 @@ const Borrow = () => {
                 Proceed
               </div>
             )}
-            <p className=" p-2 text-xs sm:text-xs">
-              By clicking <span className="text-slate-400"> Exchange</span>, I
-              agree to the{" "}
-              <Link className="text-red-400" to={"/privacy-policy"}>
-                Privacy Policy
-              </Link>{" "}
-              and{" "}
-              <Link className="text-red-400" to={"/terms-and-conditions"}>
-                Terms of Service.
-              </Link>
-            </p>
           </div>
         </div>
       </div>
