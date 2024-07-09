@@ -6,7 +6,7 @@ type TransactionProps = {
   title: String;
   type: String;
   exchangeType: String;
-  loading: Number;
+  loading: Boolean;
   symbol: String;
 };
 const Transaction = ({
@@ -35,7 +35,7 @@ const Transaction = ({
               // onFocus={handleFocus}
               className="w-full outline-none pl-2 text-center text-black"
               type="text"
-              name={type}
+              name={String(type)}
               // value={transactionObj.amount}
             />
           </div>
