@@ -3,7 +3,7 @@ type TransactionHeaderProps = {
   subheader?: String;
 };
 
-const TransactionHeader = ({ header }: TransactionHeaderProps) => {
+const TransactionHeader = ({ header, subheader }: TransactionHeaderProps) => {
   return (
     <div className="text-center sm:p-10 md:py-16 md:w-[80%] mx-auto">
       <header
@@ -13,9 +13,7 @@ const TransactionHeader = ({ header }: TransactionHeaderProps) => {
         {header}
       </header>
       <section className="font-grotesk leading-8 px-8 text-[1.5rem] md:text-[1.3rem]">
-        Stay ahead with real-time price shifts, trading volumes, and market
-        trends of top cryptocurrencies. Navigate the crypto landscape with
-        expertise and assurance.
+        {subheader}
       </section>
     </div>
   );

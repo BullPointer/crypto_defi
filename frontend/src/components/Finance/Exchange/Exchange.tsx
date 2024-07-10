@@ -6,7 +6,7 @@ import TransactionHeader from "./components/TransactionHeader";
 
 const Exchange = () => {
   const [exchangeType, setExchangeType] = useState("crypto-to-crypto");
-  const [exchangeError, setExchangeError] = useState("crypto-to-crypto");
+  // const [exchangeError, setExchangeError] = useState("crypto-to-crypto");
   const [receipient, setReceipient] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,7 +20,15 @@ const Exchange = () => {
   return (
     <>
       <div className="">
-        <TransactionHeader header={"Exchange"} />
+        <TransactionHeader
+          header={"Exchange"}
+          subheader={`Step into the world of seamless currency exchange with 
+          Osifi! Our platform makes swapping crypto as exciting as a treasure 
+          hunt. We've got you covered with lightning-fast transactions and 
+          unbeatable rates. As you dive into the adventure of crypto swapping, 
+          discover the thrill of finding the perfect exchange every time. 
+          With Osifi, every swap is a win!`}
+        />
         <div className="max-w-[800px] rounded-[25px] text-center my-[20px] mx-auto px-[10px] py-5 text-[#fff]">
           {/* <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
             Exchange
