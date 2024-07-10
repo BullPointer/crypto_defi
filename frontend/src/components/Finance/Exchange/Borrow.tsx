@@ -18,20 +18,11 @@ const Borrow = () => {
   const exchangeStyle =
     "p-2 text-[12px] font-[700] border-x border-n-5 cursor-pointer hover:text-slate-600";
   return (
-    <div className="">
-      <TransactionHeader
-        header={"Borrow"}
-        subheader={`At Osifi, we believe in the power of dreams and the magic 
-        of possibilities. Our crypto loan services are designed to help you 
-        unlock new opportunities without selling your assets. Need funds for a 
-        new venture, education, or personal growth? Borrow in ETH, USD, or LTH 
-        with flexible terms and competitive interest rates. Our seamless 
-        application process ensures you get the support you need, fast. 
-        Dare to dream big, and let Osifi turn your aspirations into reality 
-        with our innovative loan solutions.`}
-      />
-      <div className="max-w-[800px] rounded-[25px] text-center my-[20px] mx-auto px-[10px] py-5 text-[#fff]">
-        {/* <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
+    <>
+      <div className="">
+        <TransactionHeader header={"Borrow"} />
+        <div className="max-w-[800px] rounded-[25px] text-center my-[20px] mx-auto px-[10px] py-5 text-[#fff]">
+          {/* <div className="text-[#fff] text-[3rem] font-bold p-2 my-5">
             Exchange
           </div> */}
 
