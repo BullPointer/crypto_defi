@@ -17,7 +17,7 @@ contract LendDefi {
     }
 
     struct Lend {
-        address borrower;
+        address lender;
         uint256 amount;
         uint256 apy;
         Currency currency;
@@ -93,6 +93,7 @@ contract LendDefi {
 
     function lendLTH(uint256 _amount, address _lthToken) external {
         require(_amount > 0, "Amount must not be 0");
+        require(_amount == msg.value, "Amount sent not equal to amount passed");
         require(
             IERC20(_lthToken).balanceOf(msg.sender) >= _amount,
             "Insufficient balance"
@@ -119,6 +120,7 @@ contract LendDefi {
 
     function lendUSDC(uint256 _amount, address _usdcToken) external {
         require(_amount > 0, "Amount must not be 0");
+        require(_amount == msg.value, "Amount sent not equal to amount passed");
         require(
             IERC20(_usdcToken).balanceOf(msg.sender) >= _amount,
             "Insufficient balance"
