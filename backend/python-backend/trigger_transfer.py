@@ -29,7 +29,5 @@ def initiate_exchange(from_address, to_address, from_amount, to_amount, recipien
     tx_hash = w3.eth.sendRawTransaction(signed_txn.rawTransaction)
     print(f'Transaction sent with hash: {tx_hash.hex()}')
 
-# Call the function when needed
-initiate_exchange('BTC_ADDRESS', 'ETH_ADDRESS', from_amount, to_amount, "recipient")
 
 

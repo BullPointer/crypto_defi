@@ -1,4 +1,7 @@
-# Example using Python and Flask for webhooks
+# created modules
+from trigger_transfer import initiate_exchange
+
+# downloaded modules
 
 from flask import Flask, request
 
@@ -11,6 +14,8 @@ def webhook():
         recipient_address = get_eth_address(data['address'])
         amount = calculate_eth_amount(data['amount'])
         trigger_eth_transfer(recipient_address, amount)
+        initiate_exchange('BTC_ADDRESS', 'ETH_ADDRESS', from_amount, to_amount, recipient_address)
+
     return '', 200
 
 # def get_eth_address(btc_address):
