@@ -11,9 +11,15 @@ abi = 'YOUR_CONTRACT_ABI'
 contract = w3.eth.contract(address=contract_address, abi=abi)
 
 # Function to initiate the exchange
-def initiate_exchange(btc_address, eth_address, btc_amount, eth_amount):
+def initiate_exchange(from_address, to_address, from_amount, to_amount, recipient):
     nonce = w3.eth.getTransactionCount('YOUR_ADMIN_ADDRESS')
-    txn = contract.functions.initiateExchange(btc_address, eth_address, btc_amount, eth_amount).buildTransaction({
+    txn = contract.functions.initiateExchange(
+        from_address, 
+        to_address, 
+        from_amount, 
+        to_amount, 
+        recipient
+    ).buildTransaction({
         'chainId': 1,
         'gas': 2000000,
         'gasPrice': w3.toWei('50', 'gwei'),
@@ -24,4 +30,6 @@ def initiate_exchange(btc_address, eth_address, btc_amount, eth_amount):
     print(f'Transaction sent with hash: {tx_hash.hex()}')
 
 # Call the function when needed
-initiate_exchange('BTC_ADDRESS', 'ETH_ADDRESS', BTC_AMOUNT, ETH_AMOUNT)
+initiate_exchange('BTC_ADDRESS', 'ETH_ADDRESS', from_amount, to_amount, "recipient")
+
+

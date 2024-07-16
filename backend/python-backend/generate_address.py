@@ -1,38 +1,32 @@
+import json
 import requests
-from web3 import Web3
 
-def generate_crypto_address(currency, api_token):
-    if currency == "BTC":
-        url = f"https://api.blockcypher.com/v1/btc/main/addrs?token={api_token}"
-    elif currency == "LTC":
-        url = f"https://api.blockcypher.com/v1/ltc/main/addrs?token={api_token}"
-    else:
+def load_config():
+    with open('config.json') as f:
+        return json.load(f)
+
+def generate_crypto_address(currency):
+    config = load_config()
+    if currency not in config:
         raise ValueError("Unsupported currency")
+    
+    url = config[currency]['address_url']
     response = requests.post(url)
     data = response.json()
-    return data['address'], data['private']
-
-def monitor_transaction(currency, address, confirmations_required):
-    # Use appropriate API or node setup to monitor transactions
-    pass
-
-def trigger_eth_transfer(eth_address, amount, private_key, contract_address, abi):
-    w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'))
-    contract = w3.eth.contract(address=contract_address, abi=abi)
-    nonce = w3.eth.getTransactionCount('YOUR_ADMIN_ADDRESS')
-    txn = contract.functions.completeExchange(eth_address, amount).buildTransaction({
-        'chainId': 1,
-        'gas': 2000000,
-        'gasPrice': w3.toWei('50', 'gwei'),
-        'nonce': nonce,
-    })
-    signed_txn = w3.eth.account.signTransaction(txn, private_key=private_key)
-    tx_hash = w3.eth.sendRawTransaction(signed_txn.rawTransaction)
-    print(f'Transaction sent with hash: {tx_hash.hex()}')
+    
+    if currency in ["BTC", "LTC"]:
+        return data['address'], data['private']
+    elif currency == "ETH":
+        return data['result'], None  # ETH (ETH address doesn't typically need private key in this context)
+    else:
+        # Add logic for other currencies if needed
+        pass
 
 # Example usage
-btc_address, btc_private_key = generate_crypto_address("BTC", 'YOUR_BLOCKCYPHER_API_TOKEN')
-ltc_address, ltc_private_key = generate_crypto_address("LTC", 'YOUR_BLOCKCYPHER_API_TOKEN')
+btc_address, btc_private_key = generate_crypto_address("BTC")
+ltc_address, ltc_private_key = generate_crypto_address("LTC")
+eth_address, _ = generate_crypto_address("ETH")
 
-# After confirming transactions, trigger ETH transfer
-trigger_eth_transfer('ETH_ADDRESS', ETH_AMOUNT, 'YOUR_PRIVATE_KEY', 'YOUR_CONTRACT_ADDRESS', 'YOUR_CONTRACT_ABI')
+print(f"BTC Address: {btc_address}")
+print(f"LTC Address: {ltc_address}")
+print(f"ETH Address: {eth_address}")

@@ -1,0 +1,11 @@
+{
+  "BTC": {
+    "address_url": "https://api.blockcypher.com/v1/btc/main/addrs?token=YOUR_API_TOKEN"
+  },
+  "LTC": {
+    "address_url": "https://api.blockcypher.com/v1/ltc/main/addrs?token=YOUR_API_TOKEN"
+  },
+  "ETH": {
+    "address_url": "https://api.etherscan.io/api?module=account&action=address&apikey=YOUR_API_KEY"
+  }
+}
