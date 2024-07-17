@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract MultiCryptoExchange is Ownable {
+contract OnChainExchange is Ownable {
     event ExchangeInitiated(
         address indexed user,
         string fromCurrency,
@@ -21,25 +21,72 @@ contract MultiCryptoExchange is Ownable {
         uint256 toAmount
     );
 
-    struct Exchange {
-        string fromCurrency;
-        string toCurrency;
-        uint256 fromAmount;
-        uint256 toAmount;
-        address recipient;
-        bool completed;
+    enum ExchangeStatus {
+        PENDING,
+        IN_TRANSIT,
+        SUCCESS
     }
 
-    mapping(address => Exchange[]) public exchanges;
+    enum ExchangeType {
+        CRYPTO_TO_CRYPTO,
+        CRYPTO_TO_FIAT
+    }
+
+    struct Exchange {
+        uint256 exchange_id;
+        uint256 fromAmount;
+        uint256 toAmount;
+        uint256 timestamp;
+        uint256 charges;
+        address sender;
+        address receiveToSend;
+        address refundAddress;
+        address recipient;
+        string fromCurrency;
+        string toCurrency;
+        string email;
+        bool makeRefund;
+        ExchangeType exchangeType;
+        ExchangeStatus status;
+    }
+
+    Exchange[] private exchangesArr;
+    mapping(uint256 => Exchange) public exchanges;
+    mapping(uint256 => bool) private exchangeExists;
+
+    function getExchangeStatus(
+        uint256 exchange_id
+    ) external view returns (ExchangeStatus) {
+        require(exchangeExists[exchange_id], "Exchange data by ID not found");
+        return exchanges[exchange_id].status;
+    }
+
+    function getExchangeData(
+        address user,
+        uint256 exchangeIndex
+    ) public view returns (Exchange memory) {
+        require(exchangeExists[exchange_id], "Exchange data by ID not found");
+        return exchanges[exchange_id];
+    }
+
+    function getAllExchanges()
+        external
+        view
+        onlyOwner
+        returns (Exchange[] memory)
+    {
+        return exchangesArr;
+    }
 
     function initiateExchange(
-        string memory fromCurrency,
-        string memory toCurrency,
+        uint256 exchange_id,
         uint256 fromAmount,
         uint256 toAmount,
+        string memory fromCurrency,
+        string memory toCurrency,
         address recipient
     ) external {
-        exchanges[recipient].push(
+        exchanges[exchange_id] = 
             Exchange({
                 fromCurrency: fromCurrency,
                 toCurrency: toCurrency,
@@ -48,7 +95,23 @@ contract MultiCryptoExchange is Ownable {
                 recipient: recipient,
                 completed: false
             })
-        );
+        
+
+        // uint256 exchange_id;
+        // uint256 fromAmount;
+        // uint256 toAmount;
+        // uint256 timestamp;
+        // uint256 charges;
+        // address sender;
+        // address receiveToSend;
+        // address refundAddress;
+        // address recipient;
+        // string fromCurrency;
+        // string toCurrency;
+        // string email;
+        // bool makeRefund;
+        // ExchangeType exchangeType;
+        // ExchangeStatus status;
 
         emit ExchangeInitiated(
             msg.sender,
