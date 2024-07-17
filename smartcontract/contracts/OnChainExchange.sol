@@ -78,40 +78,49 @@ contract OnChainExchange is Ownable {
         return exchangesArr;
     }
 
+    function exchangeTypeFunc(string exType) {
+        if (exType == ExchangeType.CRYPTO_TO_CRYPTO) {
+            return ExchangeType.CRYPTO_TO_CRYPTO;
+        } else if(exType == ExchangeType.CRYPTO_TO_FIAT) {
+            return ExchangeType.CRYPTO_TO_FIAT;
+        } else {
+            revert("Oops! Unknown exchange type");
+        }
+    }
+
     function initiateExchange(
         uint256 exchange_id,
         uint256 fromAmount,
         uint256 toAmount,
+        address receiveToSend;
+        address refundAddress;
+        address recipient,
         string memory fromCurrency,
         string memory toCurrency,
-        address recipient
+        string email;
+        bool makeRefund;
+        string memory exType;
     ) external {
+        ExchangeType memory exchangeType = exchangeTypeFunc(exType);
+        
         exchanges[exchange_id] = 
             Exchange({
-                fromCurrency: fromCurrency,
-                toCurrency: toCurrency,
-                fromAmount: fromAmount,
-                toAmount: toAmount,
-                recipient: recipient,
-                completed: false
+                exchange_id: exchange_id;
+                fromAmount: fromAmount;
+                toAmount: toAmount;
+                timestamp: block.timestamp;
+                charges: 132000;
+                sender: msg.sender;
+                receiveToSend: receiveToSend;
+                refundAddress: refundAddress;
+                recipient: recipient;
+                fromCurrency: fromCurrency;
+                toCurrency: toCurrency;
+                email: email;
+                makeRefund: makeRefund;
+                exchangeType: exchangeType;
+                status: ExchangeStatus.PENDING;
             })
-        
-
-        // uint256 exchange_id;
-        // uint256 fromAmount;
-        // uint256 toAmount;
-        // uint256 timestamp;
-        // uint256 charges;
-        // address sender;
-        // address receiveToSend;
-        // address refundAddress;
-        // address recipient;
-        // string fromCurrency;
-        // string toCurrency;
-        // string email;
-        // bool makeRefund;
-        // ExchangeType exchangeType;
-        // ExchangeStatus status;
 
         emit ExchangeInitiated(
             msg.sender,
