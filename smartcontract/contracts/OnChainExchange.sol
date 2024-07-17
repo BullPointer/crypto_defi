@@ -51,22 +51,25 @@ contract OnChainExchange is Ownable {
     }
 
     Exchange[] private exchangesArr;
-    mapping(uint256 => Exchange) public exchanges;
-    mapping(uint256 => bool) private exchangeExists;
+    mapping(bytes => Exchange) public exchanges;
+    mapping(bytes => bool) private exchangeExists;
 
-    function getExchangeStatus(
-        uint256 exchange_id
-    ) external view returns (ExchangeStatus) {
-        require(exchangeExists[exchange_id], "Exchange data by ID not found");
-        return exchanges[exchange_id].status;
+    function getExchangeStatus(string calldata exchange_id) 
+        external 
+        view 
+        returns (ExchangeStatus) 
+    {
+        require(exchangeExists[bytes(exchange_id)], "Exchange data by ID not found");
+        return exchanges[bytes(exchange_id)].status;
     }
 
-    function getExchangeData(
-        address user,
-        uint256 exchangeIndex
-    ) public view returns (Exchange memory) {
-        require(exchangeExists[exchange_id], "Exchange data by ID not found");
-        return exchanges[exchange_id];
+    function getExchangeData(string calldata exchange_id) 
+        public 
+        view 
+        returns (Exchange memory) 
+    {
+        require(exchangeExists[bytes(exchange_id)], "Exchange data by ID not found");
+        return exchanges[bytes(exchange_id)];
     }
 
     function getAllExchanges()
@@ -126,9 +129,9 @@ contract OnChainExchange is Ownable {
     ) external {
         
         ExchangeType memory exchangeType = exchangeTypeFunc(exType);
-        string exchange_id = generateUniqueID(fromAmount, toAmount, recipient);
+        string memory exchange_id = generateUniqueID(fromAmount, toAmount, recipient);
 
-        exchanges[exchange_id] = 
+        exchanges[bytes(exchange_id)] = 
             Exchange({
                 exchange_id: exchange_id;
                 fromAmount: fromAmount;
@@ -144,8 +147,10 @@ contract OnChainExchange is Ownable {
                 email: email;
                 makeRefund: makeRefund;
                 exchangeType: exchangeType;
-                status: ExchangeStatus.IN_TRANSIT;
-            })
+                status: ExchangeStatus.PENDING;
+            });
+
+        exchangeExists[bytes(exchange_id)] = true;
 
         emit ExchangeInitiated(
             msg.sender,
@@ -157,33 +162,42 @@ contract OnChainExchange is Ownable {
         );
     }
 
-    function confirmTransaction() {
+    function confirmReceivedTransaction(string calldata exchange_id) external  {
+        require(exchangeExists[bytes(exchange_id)], "Exchange data by ID not found");
+        
+        Exchange storage exchange = exchanges[bytes(exhange_id)];
+        require(exchage.status == ExchangeStatus.PENDING, "Transaction is not Pending");
 
+        exchange.status = ExchangeStatus.IN_TRANSIT;
     }
+
     function completeExchange(
-        address user,
-        uint256 exchangeIndex
+        string calldata exchange_id
     ) external onlyOwner {
-        Exchange storage ex = exchanges[user][exchangeIndex];
-        require(!ex.completed, "Exchange already completed");
+        require(exchangeExists[bytes(exchange_id)], "Exchange data by ID not found");
+
+        Exchange storage exchage = exchanges[bytes(exchange_id)];
+
+        require(exchage.status == ExchangeStatus.IN_TRANSIT, "Exchange already completed");
 
         if (
-            keccak256(abi.encodePacked(ex.toCurrency)) ==
+            keccak256(abi.encodePacked(exchage.toCurrency)) ==
             keccak256(abi.encodePacked("ETH"))
         ) {
-            payable(user).transfer(ex.toAmount);
+            payable(exchage.recipient).transfer(exchage.toAmount);
         } else {
-            IERC20 token = IERC20(getTokenAddress(ex.toCurrency));
-            token.transfer(user, ex.toAmount);
+            IERC20 token = IERC20(getTokenAddress(exchage.toCurrency));
+            token.transfer(exchage.recipient, exchage.toAmount);
         }
 
-        ex.completed = true;
+        exchage.status = ExchangeStatus.SUCCESS;
+
         emit ExchangeCompleted(
-            user,
-            ex.fromCurrency,
-            ex.toCurrency,
-            ex.fromAmount,
-            ex.toAmount
+            exchage.recipient,
+            exchage.fromCurrency,
+            exchage.toCurrency,
+            exchage.fromAmount,
+            exchage.toAmount
         );
     }
 

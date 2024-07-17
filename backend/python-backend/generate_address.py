@@ -1,6 +1,9 @@
 import json
 import requests
 
+# Use APIs or run a Bitcoin node to monitor incoming transactions to these addresses.
+# Confirm the transaction after the required number of confirmations.
+
 def load_config():
     with open('config.json') as f:
         return json.load(f)
