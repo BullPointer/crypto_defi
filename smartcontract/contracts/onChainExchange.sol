@@ -38,7 +38,7 @@ contract MultiCryptoExchange is Ownable {
         uint256 fromAmount,
         uint256 toAmount,
         address recipient
-    ) external onlyOwner {
+    ) external {
         exchanges[recipient].push(
             Exchange({
                 fromCurrency: fromCurrency,

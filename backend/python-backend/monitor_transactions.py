@@ -1,8 +1,7 @@
 # created modules
-from trigger_transfer import initiate_exchange
+from complete_transfer import complete_exchange
 
 # downloaded modules
-
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -10,25 +9,12 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.json
-    if data['confirmations'] >= REQUIRED_CONFIRMATIONS:
-        recipient_address = get_eth_address(data['address'])
-        amount = calculate_eth_amount(data['amount'])
-        trigger_eth_transfer(recipient_address, amount)
-        initiate_exchange('BTC_ADDRESS', 'ETH_ADDRESS', from_amount, to_amount, recipient_address)
+    if data['confirmations'] >= "REQUIRED_CONFIRMATIONS":
+        user = data['user_address']
+        user_index = data['user_index']
+        complete_exchange(user, user_index)
 
     return '', 200
-
-# def get_eth_address(btc_address):
-#     # Retrieve Ethereum address associated with the Bitcoin address
-#     pass
-
-# def calculate_eth_amount(btc_amount):
-#     # Calculate the equivalent Ethereum amount
-#     pass
-
-# def trigger_eth_transfer(eth_address, amount):
-#     # Trigger the Ethereum transfer by interacting with the smart contract
-#     pass
 
 def monitor_transaction(currency, address, confirmations_required):
     # Use appropriate API or node setup to monitor transactions

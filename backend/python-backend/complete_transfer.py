@@ -1,5 +1,3 @@
-# Example using web3.py to interact with the Ethereum smart contract
-
 from web3 import Web3
 
 # Connect to Ethereum node
@@ -11,15 +9,9 @@ abi = 'YOUR_CONTRACT_ABI'
 contract = w3.eth.contract(address=contract_address, abi=abi)
 
 # Function to initiate the exchange
-def initiate_exchange(from_address, to_address, from_amount, to_amount, recipient):
+def complete_exchange(user, user_index):
     nonce = w3.eth.getTransactionCount('YOUR_ADMIN_ADDRESS')
-    txn = contract.functions.initiateExchange(
-        from_address, 
-        to_address, 
-        from_amount, 
-        to_amount, 
-        recipient
-    ).buildTransaction({
+    txn = contract.functions.completeExchange(user, user_index).buildTransaction({
         'chainId': 1,
         'gas': 2000000,
         'gasPrice': w3.toWei('50', 'gwei'),
