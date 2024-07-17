@@ -78,6 +78,30 @@ contract OnChainExchange is Ownable {
         return exchangesArr;
     }
 
+
+    // Function to generate a pseudo-random unique identifier
+    function generateUniqueID( 
+            uint256 fromAmount,
+            uint256 toAmount,
+            address recipient
+        ) internal view returns (string memory) {
+        bytes32 hash = keccak256(abi.encodePacked(fromAmount, toAmount, recipient, block.timestamp));
+        
+        // Convert the hash to a base-36 string (using 0-9 and a-z)
+        return toBase36(uint256(hash));
+    }
+
+    // Helper function to convert a uint256 to a base-36 string
+    function toBase36(uint256 value) internal pure returns (string memory) {
+        bytes memory alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
+        bytes memory result = new bytes(16); 
+        for (uint256 i = 0; i < 16; i++) {
+            result[15 - i] = alphabet[value % 36];
+            value /= 36;
+        }
+        return string(result);
+    }
+
     function exchangeTypeFunc(string exType) {
         if (exType == ExchangeType.CRYPTO_TO_CRYPTO) {
             return ExchangeType.CRYPTO_TO_CRYPTO;
@@ -89,7 +113,6 @@ contract OnChainExchange is Ownable {
     }
 
     function initiateExchange(
-        uint256 exchange_id,
         uint256 fromAmount,
         uint256 toAmount,
         address receiveToSend;
@@ -101,8 +124,10 @@ contract OnChainExchange is Ownable {
         bool makeRefund;
         string memory exType;
     ) external {
-        ExchangeType memory exchangeType = exchangeTypeFunc(exType);
         
+        ExchangeType memory exchangeType = exchangeTypeFunc(exType);
+        string exchange_id = generateUniqueID(fromAmount, toAmount, recipient);
+
         exchanges[exchange_id] = 
             Exchange({
                 exchange_id: exchange_id;
@@ -119,7 +144,7 @@ contract OnChainExchange is Ownable {
                 email: email;
                 makeRefund: makeRefund;
                 exchangeType: exchangeType;
-                status: ExchangeStatus.PENDING;
+                status: ExchangeStatus.IN_TRANSIT;
             })
 
         emit ExchangeInitiated(
@@ -132,6 +157,9 @@ contract OnChainExchange is Ownable {
         );
     }
 
+    function confirmTransaction() {
+
+    }
     function completeExchange(
         address user,
         uint256 exchangeIndex
