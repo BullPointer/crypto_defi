@@ -10,9 +10,8 @@ app = Flask(__name__)
 def webhook():
     data = request.json
     if data['confirmations'] >= "REQUIRED_CONFIRMATIONS":
-        user = data['user_address']
-        user_index = data['user_index']
-        complete_exchange(user, user_index)
+        exchange_id = data['exchange_id']
+        complete_exchange(exchange_id)
 
     return '', 200
 

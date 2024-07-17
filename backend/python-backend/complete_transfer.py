@@ -9,9 +9,9 @@ abi = 'YOUR_CONTRACT_ABI'
 contract = w3.eth.contract(address=contract_address, abi=abi)
 
 # Function to initiate the exchange
-def complete_exchange(user, user_index):
+def complete_exchange(exchange_id):
     nonce = w3.eth.getTransactionCount('YOUR_ADMIN_ADDRESS')
-    txn = contract.functions.completeExchange(user, user_index).buildTransaction({
+    txn = contract.functions.completeExchange(exchange_id).buildTransaction({
         'chainId': 1,
         'gas': 2000000,
         'gasPrice': w3.toWei('50', 'gwei'),
