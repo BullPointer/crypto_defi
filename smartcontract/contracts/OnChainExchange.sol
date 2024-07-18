@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract OnChainExchange is Ownable {
+contract OnChainExchange is Ownable, ReentrancyGuard {
     event ExchangeInitiated(
         address indexed user,
         string fromCurrency,
@@ -51,23 +52,35 @@ contract OnChainExchange is Ownable {
     }
 
     Exchange[] private exchangesArr;
-    mapping(bytes32 => Exchange) public exchanges;
+    mapping(bytes32 => Exchange) private exchanges;
     mapping(bytes32 => bool) private exchangeExists;
+    mapping(bytes32 => address) private tokenAddresses;
+
+    modifier exchangeExistsCheck(bytes32 idHash) {
+        require(exchangeExists[idHash], "Exchange data by ID not found");
+        _;
+    }
 
     function getExchangeStatus(
         string calldata exchange_id
-    ) external view returns (ExchangeStatus) {
-        bytes32 idHash = keccak256(abi.encodePacked(exchange_id));
-        require(exchangeExists[idHash], "Exchange data by ID not found");
-        return exchanges[idHash].status;
+    )
+        external
+        view
+        exchangeExistsCheck(keccak256(abi.encodePacked(exchange_id)))
+        returns (ExchangeStatus)
+    {
+        return exchanges[keccak256(abi.encodePacked(exchange_id))].status;
     }
 
     function getExchangeData(
         string calldata exchange_id
-    ) public view returns (Exchange memory) {
-        bytes32 idHash = keccak256(abi.encodePacked(exchange_id));
-        require(exchangeExists[idHash], "Exchange data by ID not found");
-        return exchanges[idHash];
+    )
+        public
+        view
+        exchangeExistsCheck(keccak256(abi.encodePacked(exchange_id)))
+        returns (Exchange memory)
+    {
+        return exchanges[keccak256(abi.encodePacked(exchange_id))];
     }
 
     function getAllExchanges()
@@ -129,6 +142,20 @@ contract OnChainExchange is Ownable {
         }
     }
 
+    /*
+     * @notice Initiates an exchange transaction.
+     * @param fromAmount The amount of the source currency.
+     * @param toAmount The amount of the target currency.
+     * @param receiveToSend The address to send the received currency.
+     * @param refundAddress The address for refund in case of failure.
+     * @param recipient The address of the recipient.
+     * @param fromCurrency The source currency code.
+     * @param toCurrency The target currency code.
+     * @param email The user's email address.
+     * @param makeRefund A flag indicating if a refund should be made.
+     * @param exType The type of exchange (CRYPTO_TO_CRYPTO or CRYPTO_TO_FIAT).
+     */
+
     function initiateExchange(
         uint256 fromAmount,
         uint256 toAmount,
@@ -180,9 +207,10 @@ contract OnChainExchange is Ownable {
         );
     }
 
-    function confirmReceivedTransaction(string calldata exchange_id) external {
+    function confirmReceivedTransaction(
+        string calldata exchange_id
+    ) external exchangeExistsCheck(keccak256(abi.encodePacked(exchange_id))) {
         bytes32 idHash = keccak256(abi.encodePacked(exchange_id));
-        require(exchangeExists[idHash], "Exchange data by ID not found");
 
         Exchange storage exchange = exchanges[idHash];
         require(
@@ -193,9 +221,15 @@ contract OnChainExchange is Ownable {
         exchange.status = ExchangeStatus.IN_TRANSIT;
     }
 
-    function completeExchange(string calldata exchange_id) external onlyOwner {
+    function completeExchange(
+        string calldata exchange_id
+    )
+        external
+        exchangeExistsCheck(keccak256(abi.encodePacked(exchange_id)))
+        onlyOwner
+        nonReentrant
+    {
         bytes32 idHash = keccak256(abi.encodePacked(exchange_id));
-        require(exchangeExists[idHash], "Exchange data by ID not found");
 
         Exchange storage exchange = exchanges[idHash];
 
@@ -225,17 +259,24 @@ contract OnChainExchange is Ownable {
         );
     }
 
+    function setTokenAddress(
+        string calldata _currency,
+        address token
+    ) external onlyOwner {
+        bytes32 currencyHash = keccak256(abi.encodePacked(_currency));
+        tokenAddresses[currencyHash] = token;
+    }
+
     function getTokenAddress(
-        string memory currency
-    ) private pure returns (address) {
-        if (
-            keccak256(abi.encodePacked(currency)) ==
-            keccak256(abi.encodePacked("USDT"))
-        ) {
-            return 0x1234567890abcdef1234567890abcdef12345678; // Example address
-        }
-        // Add more mappings as needed
-        return address(0);
+        string calldata _currency
+    ) private view returns (address) {
+        bytes32 currencyHash = keccak256(abi.encodePacked(_currency));
+        return tokenAddresses[currencyHash];
+    }
+
+    function removeTokenAddress(string calldata _currency) external onlyOwner {
+        bytes32 currency = keccak256(abi.encodePacked(_currency));
+        delete tokenAddresses[currency];
     }
 
     function depositETH() external payable onlyOwner {
